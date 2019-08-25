@@ -1,0 +1,13 @@
+﻿@model newMHRS.Models.Bolum
+
+<option value="">Bölüm Seçiniz</option>
+@if (ViewBag.BolumList != null)
+{
+    foreach (var item in ViewBag.BolumList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}
+
+
+

@@ -1,0 +1,12 @@
+﻿@model newMHRS.Models.Hastahane
+
+ 
+<option value="">Hastahane Seçiniz</option>
+@if (ViewBag.HastahaneList != null)
+{
+    foreach (var item in ViewBag.HastahaneList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}
+

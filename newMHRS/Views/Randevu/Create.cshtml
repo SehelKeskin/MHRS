@@ -1,0 +1,240 @@
+﻿
+@model newMHRS.Models.CascadingClass
+
+@{
+    //ViewBag.Title = "Create";
+    Layout = null;
+
+    // if (Response.Cookies["hastaId"].Value==null)
+    //{
+
+    //    Response.Redirect("~/Login/Index");
+    //}
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Randevu</h4>
+
+        <hr />
+
+        @*<h3>Hoşgeldin, Sn. @Response.Cookies["hastaId"].Value</h3>*@
+
+        <h3>Hoşgeldin, Sn.@Session["hastaAd"] @Session["hastaSoyad"]</h3><!--ToString()-->
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.HastaId, "HastaId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("HastaId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.HastaId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tarih, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tarih, new { htmlAttributes = new { @class = "form-control" } })
+                <label>@ViewBag.TarihView</label>
+                @Html.ValidationMessageFor(model => model.Tarih, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SehirId, "SehirId", htmlAttributes: new { @class = "control-label col-md-2", onchange = "LoadIlce(this)" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("SehirId", null, htmlAttributes: new { @class = "form-control" })*@
+
+                @if (ViewBag.SehirList != null)
+                {
+                    @Html.DropDownListFor(m => m.SehirId, ViewBag.SehirList as SelectList, "--Şehir seçiniz", new { @class = "form-control" })
+                }
+
+                @Html.ValidationMessageFor(model => model.SehirId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IlceId, "IlceId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("IlceId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(m => m.IlceId, new SelectList(""), "--İlçe Seçiniz", new { @class = "form-control" })
+                <label>@ViewBag.IlceView</label>
+                @Html.ValidationMessageFor(model => model.IlceId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HastahaneId, "HastahaneId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("HastahaneId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(m => m.HastahaneId, new SelectList(""), "--Hastahane Seçiniz", new { @class = "form-control" })
+                <label>@ViewBag.HastahaneView</label>
+
+                @Html.ValidationMessageFor(model => model.HastahaneId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BolumId, "BolumId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("BolumId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(m => m.BolumId, new SelectList(""), "--Bölüm Seçiniz", new { @class = "form-control" })
+                <label>@ViewBag.BolumView</label>
+                @Html.ValidationMessageFor(model => model.BolumId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DoktorId, "DoktorId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("DoktorId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(m => m.DoktorId, new SelectList(""), "--Doktor Seçiniz", new { @class = "form-control" })
+                <label>@ViewBag.DoktorView</label>
+                @Html.ValidationMessageFor(model => model.DoktorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SaatId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.DropDownListFor(m => m.SaatId, new SelectList(""), "--Saat Seçiniz", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SaatId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#SehirId").change(function () {
+            var sehirId = $(this).val();
+            debugger
+            $.ajax({
+                method:"POST",
+               // type: "post",
+               // url: "/Randevu/GetIlceList?SehirId=" + sehirId,
+             //   url: "@Url.Action("GetIlceList")" + "?SehirId=" + sehirId,
+                 url: '@Url.Action("GetIlceList")' + "?SehirId=" + this.value,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#IlceId").empty();
+                       //$("#HastahaneId").empty();
+                    $("#IlceId").append(response);
+                }
+            })
+
+        })
+
+
+
+         $("#IlceId").change(function () {
+            var ilceId = $(this).val();
+            debugger
+            $.ajax({
+                method:"POST",
+               // type: "post",
+               // url: "/Randevu/GetIlceList?SehirId=" + sehirId,
+             //   url: "@Url.Action("GetIlceList")" + "?SehirId=" + sehirId,
+                 url: '@Url.Action("GetHastahaneList")' + "?IlceId=" + this.value,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#HastahaneId").empty();
+                    $("#HastahaneId").append(response);
+                }
+            })
+
+         })
+
+
+
+          $("#HastahaneId").change(function () {
+            var hastahaneId = $(this).val();
+            debugger
+            $.ajax({
+                method:"POST",
+               // type: "post",
+               // url: "/Randevu/GetIlceList?SehirId=" + sehirId,
+
+                 url: '@Url.Action("GetBolumList")' + "?HastahaneId=" + this.value,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#BolumId").empty();
+                    $("#BolumId").append(response);
+                }
+            })
+
+          })
+
+
+
+          $("#BolumId").change(function () {
+            var bolumId = $(this).val();
+            debugger
+            $.ajax({
+                method:"POST",
+               // type: "post",
+               // url: "/Randevu/GetIlceList?SehirId=" + sehirId,
+
+                 url: '@Url.Action("GetDoktorList")' + "?BolumId=" + this.value,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#DoktorId").empty();
+                    $("#DoktorId").append(response);
+                }
+            })
+
+          })
+
+
+          $("#DoktorId").change(function () {
+            var doktorId = $(this).val();
+            debugger
+            $.ajax({
+                method:"POST",
+               // type: "post",
+               // url: "/Randevu/GetIlceList?SehirId=" + sehirId,
+
+                 url: '@Url.Action("GetSaatList")' + "?DoktorId=" + this.value,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#SaatId").empty();
+                    $("#SaatId").append(response);
+                }
+            })
+
+          })
+    })
+
+
+</script>
+
+
+
+}

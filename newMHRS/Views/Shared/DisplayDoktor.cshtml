@@ -1,0 +1,11 @@
+﻿@model newMHRS.Models.Doktor
+
+<option value="">Doktor Seçiniz</option>
+@if (ViewBag.DoktorList != null)
+{
+    foreach (var item in ViewBag.DoktorList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}
+

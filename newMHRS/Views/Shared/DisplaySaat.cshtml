@@ -1,0 +1,13 @@
+﻿@model newMHRS.Models.Saat
+
+<option value="">Saat Seçiniz</option>
+@if (ViewBag.SaatList!= null)
+{
+    foreach (var item in ViewBag.SaatList )
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}
+
+
+

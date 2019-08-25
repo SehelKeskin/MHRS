@@ -1,0 +1,124 @@
+﻿@model newMHRS.Models.Hasta
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        #login-div {
+            position: absolute;
+            left: 40%;
+            top: 40%;
+            border: 1px solid #ccc;
+            padding: 10px 10px;
+        }
+
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+   
+
+  
+</head>
+<body>
+
+
+    <div id="login-div">
+        @using (Html.BeginForm("Authorise", "Login", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <table>
+                <tr>
+                    <td></td>
+                    <td style="text-decoration:underline">Login</td>
+
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.Tc)</td>
+                    <td>@Html.EditorFor(model => model.Tc)</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Tc)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.Sifre)</td>
+                    <td>@Html.EditorFor(model => model.Sifre)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Sifre)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @*<label class="field-validation-error">@Html.DisplayFor(model => model.LoginErorMsg)</label>*@
+                        <label class="field-validation-error">@ViewBag.Message</label>
+                </tr>
+                <tr>
+                    <td>
+
+                    
+                        <input type="submit" value="Giriş" />
+                        <input type="reset" value="clear" />
+                        <a href="@Url.Action("Create", "Login")">Kullanıcı Oluştur</a>
+                        @*<a href="javascript:void(0);" data-toggle="modal" data-target="#exampleModal">Kayıt Ol</a>*@
+
+                    </td>
+                </tr>
+
+            </table>
+        }
+  
+        @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    </div>
+
+    @*@section Scripts {*@
+        @*@Scripts.Render("~/bundles/jqueryval")*@
+        <script>
+            function HastaEkle()
+            {
+                    var hastaTc = $("#Tc").val();
+                    var hastaAd = $("#Ad").val();
+                    var hastaSoyad = $("#Soyad").val();
+                    var hastaCinsiyet = $("#Cinsiyet").val();
+                    var hastaDogumTarihi = $("#DogumTarihi").val();
+                    var hastaDogumYeri = $("#DogumYeri").val();
+                    var hastaAnneAdi = $("#AnneAdi").val();
+                    var hastaBabaAdi = $("#BabaAdi").val();
+                    var hastaCepTel = $("#CepTel").val();
+                    var hastaSabitTel = $("#SabitTel").val();
+                    var hastaMail = $("#Mail").val();
+                    var hastaSifre = $("#Sifre").val();
+
+                    $.post("@Url.Action("EkleHasta")",
+                        { Tc: hastaTc, Ad: hastaAd, Soyad: hastaSoyad, Cinsiyet: hastaCinsiyet, DogumTarihi: hastaDogumTarihi, DogumYeri: hastaDogumYeri, AnneAdi: hastaAnneAdi, BabaAdi: hastaBabaAdi, Ceptel: hastaCepTel, SabitTel: hastaSabitTel, Mail: hastaMail, Sifre: hastaSifre },
+                        function (data)
+                        {
+                            if (data == true) {
+                                alert("Kaydınız Başarıyla Oluşturuldu.");
+                                $("#exampleModal").modal("hide");
+                            }
+                        });
+            }
+
+        </script> @*}*@
+
+</body>
+
+</html>
