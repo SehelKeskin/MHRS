@@ -9,12 +9,13 @@ namespace newMHRS.Models
 {
     public class Randevu
     {
+
         public int Id { get; set; }
 
         [Display(Name = "Tarih:")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Lütfen Randevu Tarihi Seçiniz.")]
-     //   [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        //   [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Tarih { get; set; }
 
         public int? SehirId { get; set; }
@@ -50,7 +51,6 @@ namespace newMHRS.Models
 
 
         public bool IptalMi { get; set; }
-       
 
     }
 }

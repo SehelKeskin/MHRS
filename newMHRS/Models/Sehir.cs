@@ -22,5 +22,6 @@ namespace newMHRS.Models
         public virtual ICollection<Randevu> Randevus { get; set; }
 
 
+
     }
 }

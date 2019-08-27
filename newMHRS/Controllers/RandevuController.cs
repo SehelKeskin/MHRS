@@ -40,13 +40,18 @@ namespace newMHRS.Controllers
             if (ModelState.IsValid)
             {
                 var randevu = new Randevu();
+                var hasta = (int)Session["hastaId"];
+                var randevuSayi = db.Randevus.Where(x => x.HastaId == hasta && (x.Tarih == cascadingClass.Tarih)).Count();
+                var bolumSayi = db.Randevus.Where(x => x.HastaId == hasta && (x.Tarih == cascadingClass.Tarih) && (x.BolumId == cascadingClass.BolumId)).Count();
+
 
                 // randevu.HastaId = Response.Cookies["hastaId"].Value.ToString();                
                 if (cascadingClass.Tarih < simdikiTarih || cascadingClass.Tarih > ileriTarih)
                 {
-                    ViewBag.TarihView = "Alacağınız randevu 15 günü geçemez. " + simdikiTarih.ToString("dd/MM/yyyy") + " ile "+ileriTarih.ToString("dd/MM/yyyy") +" arasında randevu alınız.";
+                    ViewBag.TarihView = "Alacağınız randevu 15 günü geçemez. " + simdikiTarih.ToString("dd/MM/yyyy") + " ile " + ileriTarih.ToString("dd/MM/yyyy") + " arasında randevu alınız." + cascadingClass.Tarih;
                 }
-                else
+
+                else if (randevuSayi < 3 && bolumSayi < 1)
                 {
                     randevu.HastaId = (int)Session["hastaId"];
                     randevu.Tarih = cascadingClass.Tarih;
@@ -60,6 +65,15 @@ namespace newMHRS.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+                else if (randevuSayi >= 3)
+                {
+                    ViewBag.FazlaRandevu = "1 Günde 3'den fazla Randevu Alamazınız.";
+                }
+                else if (bolumSayi > 1)
+                {
+                    ViewBag.FazlaBolum = "Aynı bölüme 1 den fazla randevu alamazsınız.";
+                }
+
             }
 
             return View(cascadingClass);
