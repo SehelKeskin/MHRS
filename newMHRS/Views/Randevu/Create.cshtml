@@ -39,8 +39,8 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Tarih, new { htmlAttributes = new { @class = "form-control" } })
                 <label>@ViewBag.TarihView</label>
-                <label> @ViewBag.FazlaRandevu</label>
-                <label>@ViewBag.FazlaBolum</label>
+                <label> @ViewBag.FazlaRandevu 646</label>
+                <label>@ViewBag.FazlaBolum 545</label>
                 @Html.ValidationMessageFor(model => model.Tarih, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,7 +55,7 @@
                 {
                     @Html.DropDownListFor(m => m.SehirId, ViewBag.SehirList as SelectList, "--Şehir seçiniz", new { @class = "form-control" })
                 }
-
+                <label>@ViewBag.FazlaBolum</label>
                 @Html.ValidationMessageFor(model => model.SehirId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -239,4 +239,3 @@
 
 
 
-}

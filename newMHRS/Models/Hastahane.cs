@@ -16,9 +16,9 @@ namespace newMHRS.Models
         [Display(Name = "Hastahane Adı:")]
         public string Ad { get; set; }
 
-        //public int SehirId { get; set; }
-        //[ForeignKey("SehirId")]
-        //public virtual Sehir Sehir { get; set; }
+        public int SehirId { get; set; }
+        [ForeignKey("SehirId")]
+        public virtual Sehir Sehir { get; set; }
 
         public int IlceId { get; set; }
         [ForeignKey("IlceId")]

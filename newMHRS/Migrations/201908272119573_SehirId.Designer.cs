@@ -7,13 +7,13 @@ namespace newMHRS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Alann : IMigrationMetadata
+    public sealed partial class SehirId : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Alann));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SehirId));
         
         string IMigrationMetadata.Id
         {
-            get { return "201908251629179_Alann"; }
+            get { return "201908272119573_SehirId"; }
         }
         
         string IMigrationMetadata.Source

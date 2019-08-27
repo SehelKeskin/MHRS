@@ -3,7 +3,7 @@ namespace newMHRS.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Alann : DbMigration
+    public partial class SehirId : DbMigration
     {
         public override void Up()
         {
@@ -31,15 +31,12 @@ namespace newMHRS.Migrations
                         Email = c.String(maxLength: 50),
                         HastahaneId = c.Int(),
                         BolumId = c.Int(),
-                        SaatId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Bolums", t => t.BolumId)
                 .ForeignKey("dbo.Hastahanes", t => t.HastahaneId)
-                .ForeignKey("dbo.Saats", t => t.SaatId, cascadeDelete: true)
                 .Index(t => t.HastahaneId)
-                .Index(t => t.BolumId)
-                .Index(t => t.SaatId);
+                .Index(t => t.BolumId);
             
             CreateTable(
                 "dbo.Hastahanes",
@@ -47,16 +44,16 @@ namespace newMHRS.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Ad = c.String(nullable: false, maxLength: 100),
+                        SehirId = c.Int(nullable: false),
                         IlceId = c.Int(nullable: false),
                         Adres = c.String(maxLength: 4000),
                         Tel = c.String(maxLength: 100),
-                        Sehir_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Ilces", t => t.IlceId, cascadeDelete: true)
-                .ForeignKey("dbo.Sehirs", t => t.Sehir_Id)
-                .Index(t => t.IlceId)
-                .Index(t => t.Sehir_Id);
+                .ForeignKey("dbo.Sehirs", t => t.SehirId, cascadeDelete: true)
+                .Index(t => t.SehirId)
+                .Index(t => t.IlceId);
             
             CreateTable(
                 "dbo.Ilces",
@@ -82,6 +79,7 @@ namespace newMHRS.Migrations
                         HastahaneId = c.Int(),
                         BolumId = c.Int(),
                         DoktorId = c.Int(nullable: false),
+                        SaatId = c.Int(),
                         IptalMi = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -90,13 +88,15 @@ namespace newMHRS.Migrations
                 .ForeignKey("dbo.Hastas", t => t.HastaId, cascadeDelete: true)
                 .ForeignKey("dbo.Hastahanes", t => t.HastahaneId)
                 .ForeignKey("dbo.Ilces", t => t.IlceId, cascadeDelete: true)
+                .ForeignKey("dbo.Saats", t => t.SaatId)
                 .ForeignKey("dbo.Sehirs", t => t.SehirId)
                 .Index(t => t.SehirId)
                 .Index(t => t.IlceId)
                 .Index(t => t.HastaId)
                 .Index(t => t.HastahaneId)
                 .Index(t => t.BolumId)
-                .Index(t => t.DoktorId);
+                .Index(t => t.DoktorId)
+                .Index(t => t.SaatId);
             
             CreateTable(
                 "dbo.Hastas",
@@ -119,6 +119,18 @@ namespace newMHRS.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Saats",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SaatKac = c.String(nullable: false),
+                        DoktorId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Doktors", t => t.DoktorId)
+                .Index(t => t.DoktorId);
+            
+            CreateTable(
                 "dbo.Sehirs",
                 c => new
                     {
@@ -127,23 +139,15 @@ namespace newMHRS.Migrations
                     })
                 .PrimaryKey(t => t.Id);
             
-            CreateTable(
-                "dbo.Saats",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        SaatKac = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Doktors", "SaatId", "dbo.Saats");
             DropForeignKey("dbo.Randevus", "SehirId", "dbo.Sehirs");
             DropForeignKey("dbo.Ilces", "SehirId", "dbo.Sehirs");
-            DropForeignKey("dbo.Hastahanes", "Sehir_Id", "dbo.Sehirs");
+            DropForeignKey("dbo.Hastahanes", "SehirId", "dbo.Sehirs");
+            DropForeignKey("dbo.Randevus", "SaatId", "dbo.Saats");
+            DropForeignKey("dbo.Saats", "DoktorId", "dbo.Doktors");
             DropForeignKey("dbo.Randevus", "IlceId", "dbo.Ilces");
             DropForeignKey("dbo.Randevus", "HastahaneId", "dbo.Hastahanes");
             DropForeignKey("dbo.Randevus", "HastaId", "dbo.Hastas");
@@ -153,6 +157,8 @@ namespace newMHRS.Migrations
             DropForeignKey("dbo.Doktors", "HastahaneId", "dbo.Hastahanes");
             DropForeignKey("dbo.Bolums", "HastahaneId", "dbo.Hastahanes");
             DropForeignKey("dbo.Doktors", "BolumId", "dbo.Bolums");
+            DropIndex("dbo.Saats", new[] { "DoktorId" });
+            DropIndex("dbo.Randevus", new[] { "SaatId" });
             DropIndex("dbo.Randevus", new[] { "DoktorId" });
             DropIndex("dbo.Randevus", new[] { "BolumId" });
             DropIndex("dbo.Randevus", new[] { "HastahaneId" });
@@ -160,14 +166,13 @@ namespace newMHRS.Migrations
             DropIndex("dbo.Randevus", new[] { "IlceId" });
             DropIndex("dbo.Randevus", new[] { "SehirId" });
             DropIndex("dbo.Ilces", new[] { "SehirId" });
-            DropIndex("dbo.Hastahanes", new[] { "Sehir_Id" });
             DropIndex("dbo.Hastahanes", new[] { "IlceId" });
-            DropIndex("dbo.Doktors", new[] { "SaatId" });
+            DropIndex("dbo.Hastahanes", new[] { "SehirId" });
             DropIndex("dbo.Doktors", new[] { "BolumId" });
             DropIndex("dbo.Doktors", new[] { "HastahaneId" });
             DropIndex("dbo.Bolums", new[] { "HastahaneId" });
-            DropTable("dbo.Saats");
             DropTable("dbo.Sehirs");
+            DropTable("dbo.Saats");
             DropTable("dbo.Hastas");
             DropTable("dbo.Randevus");
             DropTable("dbo.Ilces");
