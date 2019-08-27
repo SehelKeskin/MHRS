@@ -148,6 +148,10 @@
     <Compile Include="Migrations\201908251804109_Alann234.Designer.cs">
       <DependentUpon>201908251804109_Alann234.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908272023439_Yenilik.cs" />
+    <Compile Include="Migrations\201908272023439_Yenilik.Designer.cs">
+      <DependentUpon>201908272023439_Yenilik.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bolum.cs" />
     <Compile Include="Models\CascadingClass.cs" />
@@ -535,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908251804109_Alann234.resx">
       <DependentUpon>201908251804109_Alann234.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908272023439_Yenilik.resx">
+      <DependentUpon>201908272023439_Yenilik.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
