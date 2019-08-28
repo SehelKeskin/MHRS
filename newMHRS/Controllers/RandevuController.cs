@@ -51,7 +51,7 @@ namespace newMHRS.Controllers
                     ViewBag.TarihView = "Alacağınız randevu 15 günü geçemez. " + simdikiTarih.ToString("dd/MM/yyyy") + " ile " + ileriTarih.ToString("dd/MM/yyyy") + " arasında randevu alınız." + cascadingClass.Tarih;
                 }
 
-                else if (randevuSayi < 3 && bolumSayi < 1)
+                if (randevuSayi < 3 && bolumSayi < 1)
                 {
                     randevu.HastaId = (int)Session["hastaId"];
                     randevu.Tarih = cascadingClass.Tarih;
@@ -65,11 +65,12 @@ namespace newMHRS.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                else if (randevuSayi >= 3)
+                if (randevuSayi >= 3)
                 {
                     ViewBag.FazlaRandevu = "1 Günde 3'den fazla Randevu Alamazınız.";
                 }
-                else if (bolumSayi > 1)
+                if (bolumSayi >= 1)
+              //  else
                 {
                     ViewBag.FazlaBolum = "Aynı bölüme 1 den fazla randevu alamazsınız.";
                 }
