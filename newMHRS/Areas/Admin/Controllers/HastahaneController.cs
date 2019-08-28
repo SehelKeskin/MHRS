@@ -40,8 +40,8 @@ namespace newMHRS.Areas.Admin.Controllers
         // GET: Admin/Hastahane/Create
         public ActionResult Create()
         {
-            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Name");
-            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Name");
+            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad");
+            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad");
             return View();
         }
 
@@ -59,8 +59,8 @@ namespace newMHRS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Name", hastahane.IlceId);
-            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Name", hastahane.SehirId);
+            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad", hastahane.IlceId);
+            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad", hastahane.SehirId);
             return View(hastahane);
         }
 
@@ -76,8 +76,8 @@ namespace newMHRS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Name", hastahane.IlceId);
-            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Name", hastahane.SehirId);
+            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad", hastahane.IlceId);
+            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad", hastahane.SehirId);
             return View(hastahane);
         }
 
@@ -94,8 +94,8 @@ namespace newMHRS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Name", hastahane.IlceId);
-            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Name", hastahane.SehirId);
+            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad", hastahane.IlceId);
+            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad", hastahane.SehirId);
             return View(hastahane);
         }
 
