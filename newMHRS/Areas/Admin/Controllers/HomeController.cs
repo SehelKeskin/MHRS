@@ -13,5 +13,10 @@ namespace newMHRS.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public ActionResult AdminLogin()
+        {
+            return View();
+        }
     }
 }
