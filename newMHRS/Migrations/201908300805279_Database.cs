@@ -3,7 +3,7 @@ namespace newMHRS.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SehirId : DbMigration
+    public partial class Database : DbMigration
     {
         public override void Up()
         {

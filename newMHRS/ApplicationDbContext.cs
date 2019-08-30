@@ -21,7 +21,7 @@ namespace newMHRS
         public virtual DbSet<Randevu> Randevus { get; set; }
         public virtual DbSet<Sehir> Sehirs { get; set; }
         public virtual DbSet<Saat> Saats { get; set; }
-
+        public virtual DbSet<AdminClass> AdminClasses { get; set; }
 
 
     }

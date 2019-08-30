@@ -11,11 +11,13 @@ using newMHRS.Models;
 
 namespace newMHRS.Areas.Admin.Controllers
 {
+    [Authorize]
     public class HastahaneController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Hastahane
+      
         public ActionResult Index()
         {
             var hastahanes = db.Hastahanes.Include(h => h.Ilce).Include(h => h.Sehir);

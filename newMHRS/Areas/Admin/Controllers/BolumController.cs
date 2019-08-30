@@ -12,108 +12,112 @@ using newMHRS.Models;
 namespace newMHRS.Areas.Admin.Controllers
 {
     [Authorize]
-    public class HastaController : Controller
+    public class BolumController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Hasta
-     
+        // GET: Admin/Bolum
         public ActionResult Index()
         {
-            return View(db.Hastas.ToList());
+            var bolums = db.Bolums.Include(b => b.Hastahane);
+            return View(bolums.ToList());
         }
 
-        // GET: Admin/Hasta/Details/5
+        // GET: Admin/Bolum/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hasta hasta = db.Hastas.Find(id);
-            if (hasta == null)
+            Bolum bolum = db.Bolums.Find(id);
+            if (bolum == null)
             {
                 return HttpNotFound();
             }
-            return View(hasta);
+            return View(bolum);
         }
 
-        // GET: Admin/Hasta/Create
+        // GET: Admin/Bolum/Create
         public ActionResult Create()
         {
+            ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad");
             return View();
         }
 
-        // POST: Admin/Hasta/Create
+        // POST: Admin/Bolum/Create
         // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre")] Hasta hasta)
+        public ActionResult Create([Bind(Include = "Id,Ad,HastahaneId")] Bolum bolum)
         {
             if (ModelState.IsValid)
             {
-                db.Hastas.Add(hasta);
+                db.Bolums.Add(bolum);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(hasta);
+            ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", bolum.HastahaneId);
+            return View(bolum);
         }
 
-        // GET: Admin/Hasta/Edit/5
+        // GET: Admin/Bolum/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hasta hasta = db.Hastas.Find(id);
-            if (hasta == null)
+            Bolum bolum = db.Bolums.Find(id);
+            if (bolum == null)
             {
                 return HttpNotFound();
             }
-            return View(hasta);
+            ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", bolum.HastahaneId);
+            return View(bolum);
         }
 
-        // POST: Admin/Hasta/Edit/5
+        // POST: Admin/Bolum/Edit/5
         // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre")] Hasta hasta)
+        public ActionResult Edit([Bind(Include = "Id,Ad,HastahaneId")] Bolum bolum)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hasta).State = EntityState.Modified;
+                db.Entry(bolum).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(hasta);
+            ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", bolum.HastahaneId);
+            return View(bolum);
         }
 
-        // GET: Admin/Hasta/Delete/5
+        // GET: Admin/Bolum/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hasta hasta = db.Hastas.Find(id);
-            if (hasta == null)
+            Bolum bolum = db.Bolums.Find(id);
+            if (bolum == null)
             {
                 return HttpNotFound();
             }
-            return View(hasta);
+            return View(bolum);
         }
 
-        // POST: Admin/Hasta/Delete/5
+        // POST: Admin/Bolum/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Hasta hasta = db.Hastas.Find(id);
-            db.Hastas.Remove(hasta);
+            Bolum bolum = db.Bolums.Find(id);
+            db.Bolums.Remove(bolum);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

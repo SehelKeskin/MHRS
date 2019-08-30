@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BolumController.cs" />
     <Compile Include="Areas\Admin\Controllers\DoktorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HastaController.cs" />
     <Compile Include="Areas\Admin\Controllers\HastahaneController.cs" />
@@ -141,11 +142,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908272119573_SehirId.cs" />
-    <Compile Include="Migrations\201908272119573_SehirId.Designer.cs">
-      <DependentUpon>201908272119573_SehirId.cs</DependentUpon>
+    <Compile Include="Migrations\201908300805279_Database.cs" />
+    <Compile Include="Migrations\201908300805279_Database.Designer.cs">
+      <DependentUpon>201908300805279_Database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908300808330_Database1.cs" />
+    <Compile Include="Migrations\201908300808330_Database1.Designer.cs">
+      <DependentUpon>201908300808330_Database1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdminClass.cs" />
     <Compile Include="Models\Bolum.cs" />
     <Compile Include="Models\CascadingClass.cs" />
     <Compile Include="Models\Doktor.cs" />
@@ -160,6 +166,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Content\fontawesome.css" />
     <Content Include="Areas\Content\all.min.css" />
     <Content Include="Areas\Content\bootstrap.bundle.min.js" />
     <Content Include="Areas\Content\css\main.css" />
@@ -179,7 +186,9 @@
     <Content Include="Areas\Content\jquery.min.js" />
     <Content Include="Areas\Content\js\main.js" />
     <Content Include="Areas\Content\js\map-custom.js" />
+    <Content Include="Areas\Content\sb-admin-2.js" />
     <Content Include="Areas\Content\sb-admin-2.min.css" />
+    <Content Include="Areas\Content\sb-admin-2.min.js" />
     <Content Include="Areas\Content\vendor\animate\animate.css" />
     <Content Include="Areas\Content\vendor\animsition\css\animsition.css" />
     <Content Include="Areas\Content\vendor\animsition\css\animsition.min.css" />
@@ -583,6 +592,11 @@
     <Content Include="Areas\Content\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Areas\Content\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Areas\Content\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Areas\Admin\Views\Bolum\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Bolum\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Bolum\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Bolum\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Bolum\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -657,8 +671,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908272119573_SehirId.resx">
-      <DependentUpon>201908272119573_SehirId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908300805279_Database.resx">
+      <DependentUpon>201908300805279_Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908300808330_Database1.resx">
+      <DependentUpon>201908300808330_Database1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

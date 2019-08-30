@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace newMHRS.Models
 {
-    public class Hasta
+    public class AdminClass
     {
-        [Display(Name = "Id:")]
-  //      [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        //artık ıd tc oldu.
 
         [RegularExpression(@"^\d+$", ErrorMessage = "Lütfen Tc'nizi sayı olarak giriniz")]
         [Required(ErrorMessage = "Lütfen Tc'nizi giriniz.")]
@@ -31,25 +27,6 @@ namespace newMHRS.Models
         [Required(ErrorMessage = "Lütfen Soyadınızı Giriniz")]
         public string Soyad { get; set; }
 
-        [Display(Name = "Cinsiyetiniz:")]
-        public Gender Cinsiyet { get; set; }
-
-
-        [DataType(DataType.Date)]
-        [Display(Name = "Doğum Tarihiniz:")]
-        public DateTime DogumTarihi { get; set; }
-
-        [MaxLength(150)]
-        [Display(Name = "Doğum Yeriniz:")]
-        public string DogumYeri { get; set; }
-
-        [Display(Name = "Annenizin Adı:")]
-        [MaxLength(50)]
-        public string AnneAdi { get; set; }
-
-        [MaxLength(50)]
-        [Display(Name = "Babanızın Adı:")]
-        public string BabaAdi { get; set; }
 
         [MaxLength(20)]
         [Display(Name = "Cep Telefonunuz:")]
@@ -62,7 +39,7 @@ namespace newMHRS.Models
         public string Mail { get; set; }
 
         [MaxLength(50)]
-        [Required(ErrorMessage ="Lütfen Şifrenizi Giriniz.")]
+        [Required(ErrorMessage = "Lütfen Şifrenizi Giriniz.")]
         [DataType(DataType.Password)]
         [Display(Name = "Şifreniz:")]
         public string Sifre { get; set; }
@@ -73,9 +50,5 @@ namespace newMHRS.Models
         [DataType(DataType.Password)]
         [Display(Name = "Tekrar Şifre:")]
         public string TSifre { get; set; }
-
-        // public string LoginErorMsg { get; set; }
-
-        public virtual ICollection<Randevu> Randevus { get; set; }
     }
 }

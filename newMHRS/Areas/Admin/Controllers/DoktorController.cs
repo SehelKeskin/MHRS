@@ -11,11 +11,13 @@ using newMHRS.Models;
 
 namespace newMHRS.Areas.Admin.Controllers
 {
+    [Authorize]
     public class DoktorController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Doktor
+   
         public ActionResult Index()
         {
             var doktors = db.Doktors.Include(d => d.Bolum).Include(d => d.Hastahane);

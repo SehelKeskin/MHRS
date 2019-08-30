@@ -17,7 +17,7 @@ namespace newMHRS.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { Controller = "Home", action = "Index", id = UrlParameter.Optional }//ctrl+akd ile kodları düzenleyebilirsin.Buradaki amaç admin yazdığında gelecek sayfan..
+                new { Controller = "Home", action = "AdminLogin", id = UrlParameter.Optional }//ctrl+akd ile kodları düzenleyebilirsin.Buradaki amaç admin yazdığında gelecek sayfan..
             );
         }
     }

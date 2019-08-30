@@ -9,14 +9,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
-
+    <title>Mhrs - Admin</title>
     <!-- Custom fonts for this template-->
     <link href="~/Areas/Content/all.min.css" rel="stylesheet" />
     <link href="~/Areas/Content/google.css" rel="stylesheet" />
 
     <!-- Custom styles for this template-->
     <link href="~/Areas/Content/sb-admin-2.min.css" rel="stylesheet" />
+
+ 
+
+    <!-- Custom styles for this template-->
+ 
+
 
 </head>
 
@@ -29,11 +34,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index","Home")">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    @*<i class="fas fa-laugh-wink"></i>*@
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">MHRS</div>
             </a>
 
             <!-- Divider -->
@@ -41,59 +46,46 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+                <a class="nav-link" href="@Url.Action("Index","Home")">
+                    @*<i class="fas fa-fw fa-tachometer-alt"></i>*@
+                    <span>Anasayfa</span>
                 </a>
             </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            
-
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-             
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="@Url.Action("Index","Hastahane")">
+                    @*<i class="fa fa-hospital-o" aria-hidden="true"></i>*@
+                    <span>Hastahaneler</span>
+                </a>
             </li>
-
-         
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-             
-                <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="@Url.Action("Index","Hastahane")">Hastahane</a>
-
-                        <a class="collapse-item" href="@Url.Action("Index","Doktor")">Doktor</a>
-                        <a class="collapse-item" href="@Url.Action("Index","Hasta")">Hasta</a>
-                        <div class="collapse-divider"></div>
-        
-          
-                     
-                    </div>
-                </div>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Bolum")">
+                    @*<i class="fas fa-fw fa-tachometer-alt"></i>*@
+                    <span>Bölümler</span>
+                </a>
             </li>
-
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Doktor")">
+                    @*<i class="fas fa-fw fa-tachometer-alt"></i>*@
+                    <span>Doktorlar</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Hasta")">
+                    @*<i class="fas fa-fw fa-tachometer-alt"></i>*@
+                    <span>Hastalar</span>
+                </a>
+            </li>
+            <!-- Divider -->
+           
             <!-- Nav Item - Charts -->
-            
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-          
+
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
@@ -148,7 +140,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hoşgeldin @HttpContext.Current.User.Identity.Name</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -218,10 +210,10 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Çıkış yapmak istediğinize emin misiniz?</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hayır</button>
+                    <a class="btn btn-primary" href="@Url.Action("AdminLogout","Home")">Evet</a>
                 </div>
             </div>
         </div>
@@ -234,8 +226,9 @@
     <script src="~/Areas/Content/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
+ 
+    <script src="~/Areas/Content/sb-admin-2.min.js"></script>
+  
 
     @RenderSection("scripts", required: false)
 </body>
