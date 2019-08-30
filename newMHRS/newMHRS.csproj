@@ -135,6 +135,7 @@
     <Compile Include="Areas\Admin\Controllers\HastaController.cs" />
     <Compile Include="Areas\Admin\Controllers\HastahaneController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Models\HastahaneView.cs" />
     <Compile Include="Controllers\GirisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -149,6 +150,18 @@
     <Compile Include="Migrations\201908300808330_Database1.cs" />
     <Compile Include="Migrations\201908300808330_Database1.Designer.cs">
       <DependentUpon>201908300808330_Database1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908301122313_HWM.cs" />
+    <Compile Include="Migrations\201908301122313_HWM.Designer.cs">
+      <DependentUpon>201908301122313_HWM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908301152510_Hata.cs" />
+    <Compile Include="Migrations\201908301152510_Hata.Designer.cs">
+      <DependentUpon>201908301152510_Hata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908301218396_AdminClasHata.cs" />
+    <Compile Include="Migrations\201908301218396_AdminClasHata.Designer.cs">
+      <DependentUpon>201908301218396_AdminClasHata.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminClass.cs" />
@@ -597,6 +610,8 @@
     <Content Include="Areas\Admin\Views\Bolum\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Bolum\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Bolum\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\IlceGetir.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\IlceGoster.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -657,7 +672,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -676,6 +690,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908300808330_Database1.resx">
       <DependentUpon>201908300808330_Database1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908301122313_HWM.resx">
+      <DependentUpon>201908301122313_HWM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908301152510_Hata.resx">
+      <DependentUpon>201908301152510_Hata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908301218396_AdminClasHata.resx">
+      <DependentUpon>201908301218396_AdminClasHata.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

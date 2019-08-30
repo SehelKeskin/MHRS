@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using newMHRS;
+using newMHRS.Areas.Admin.Models;
 using newMHRS.Models;
 
 namespace newMHRS.Areas.Admin.Controllers
@@ -38,12 +39,13 @@ namespace newMHRS.Areas.Admin.Controllers
             }
             return View(hastahane);
         }
-
+     
         // GET: Admin/Hastahane/Create
         public ActionResult Create()
         {
-            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad");
-            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad");
+            //ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad");
+            //ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad");
+            ViewBag.SehirList = new SelectList(GetSehirList(), "Id", "Ad");//sehirler tablondaki alanların!!
             return View();
         }
 
@@ -52,18 +54,49 @@ namespace newMHRS.Areas.Admin.Controllers
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Ad,SehirId,IlceId,Adres,Tel")] Hastahane hastahane)
+        public ActionResult Create(HastahaneView hastahaneView)
         {
+           ViewBag.SehirList = new SelectList(GetSehirList(), "Id", "Ad");
             if (ModelState.IsValid)
             {
-                db.Hastahanes.Add(hastahane);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+               var hastahane = new Hastahane();
+                var aynıHastahane = db.Hastahanes.Where(x => x.Ad == hastahaneView.Ad).Count();
 
-            ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad", hastahane.IlceId);
-            ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad", hastahane.SehirId);
-            return View(hastahane);
+                if (aynıHastahane>=1)
+                {
+                    ViewBag.AynıAd = "Daha önce böyle bir hastahane kaydı gerçekleştirilmiş.";
+                }
+                else
+                {
+                    hastahane.Ad = hastahaneView.Ad;
+                    hastahane.Adres = hastahaneView.Adres;
+                    hastahane.SehirId = hastahaneView.SehirId;
+                    hastahane.IlceId = hastahaneView.IlceId;
+                    hastahane.Tel = hastahaneView.Tel;
+                    db.Hastahanes.Add(hastahane);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+         
+            
+             }
+            return View(hastahaneView);
+  /*  ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad", hastahane.IlceId);
+           ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad", hastahane.SehirId);
+            return View(hastahane);*/
+        }
+
+        public List<Sehir> GetSehirList()
+        {
+            List<Sehir> sehirler = db.Sehirs.ToList();
+            return sehirler;
+        }
+
+        public ActionResult GetIlceList(int SehirId)
+        {
+            List<Ilce> selectList = db.Ilces.Where(x => x.SehirId == SehirId).ToList();
+            ViewBag.IlceList = new SelectList(selectList, "Id", "Ad");
+            return PartialView("IlceGoster");
         }
 
         // GET: Admin/Hastahane/Edit/5

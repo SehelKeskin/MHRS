@@ -1,0 +1,10 @@
+﻿@model newMHRS.Models.Ilce
+
+<option value="">İlçe Seçiniz</option>
+@if (ViewBag.IlceList != null)
+{
+    foreach (var item in ViewBag.IlceList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}

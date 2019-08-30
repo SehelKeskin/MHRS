@@ -1,54 +1,63 @@
-﻿@model newMHRS.Models.Hastahane
-
+﻿@model newMHRS.Areas.Admin.Models.HastahaneView
 @{
     ViewBag.Title = "Create";
+
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Hastahane</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Ad, "Hastahanenin Adı:", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
+                @ViewBag.AynıAd
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SehirId, "SehirId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SehirId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(model => model.SehirId, "Hastahanenin Bulunduğu İl:", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @*@Html.DropDownList("SehirId", null, htmlAttributes: new { @class = "form-control" })*@
+
+                @if (ViewBag.SehirList != null)
+                {
+                    @Html.DropDownListFor(m => m.SehirId, ViewBag.SehirList as SelectList, "--Şehir seçiniz", new { @class = "form-control" })
+                }
+
                 @Html.ValidationMessageFor(model => model.SehirId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IlceId, "IlceId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IlceId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(model => model.IlceId,"Hastahanenin Bulunduğu İlçe:", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @*@Html.DropDownList("IlceId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(m => m.IlceId, new SelectList(""), "--İlçe Seçiniz", new { @class = "form-control" })
+
                 @Html.ValidationMessageFor(model => model.IlceId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Adres, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Adres, "Hastahanenin Adres Bilgisi:", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.Adres, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Tel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Tel, "Hastahanenin Telefonu", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
             </div>
@@ -56,12 +65,49 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Kaydet" class="btn btn-success" />
+                @*@Html.ActionLink("Hastahanelere Geri Dön", "Index")*@
+
+                <a class="btn btn-primary" href="@Url.Action("Index","Hastahane")">Listeye Geri Dön</a>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+   
 </div>
+
+@*<script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+{
+    <script>
+    $(document).ready(function(){
+        $("#SehirId").change(function () {
+            var sehirId = $(this).val();
+            debugger
+            $.ajax({
+                method:"POST",
+               // type: "post",
+               // url: "/Randevu/GetIlceList?SehirId=" + sehirId,
+             //   url: "@Url.Action("GetIlceList")" + "?SehirId=" + sehirId,
+                 url: '@Url.Action("GetIlceList")' + "?SehirId=" + this.value,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#IlceId").empty();
+                       //$("#HastahaneId").empty();
+                    $("#IlceId").append(response);
+                }
+            })
+
+        })
+
+    })
+
+
+    </script>
+
+}}
