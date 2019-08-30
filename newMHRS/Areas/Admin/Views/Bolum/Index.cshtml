@@ -4,36 +4,45 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Hastahanenize Yeni Bölüm Eklemek İçin Tıklayın.", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Hastahane.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ad)
-        </th>
-        <th></th>
-    </tr>
+@*<div class="container-fluid">*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hastahane.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ad)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @*@Html.DisplayNameFor(model => model.Ad)*@
+                        <label>Bölüm Adı</label>
+                    </th>
+                    <th scope="col">
+                        @*@Html.DisplayNameFor(model => model.Hastahane.Ad)*@
+                        <label>Hastahane Adı</label>
+                    </th>
 
-</table>
+                    <th></th>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td scope="row">
+                            @Html.DisplayFor(modelItem => item.Ad)
+                        </td>
+                        <td scope="row">
+                            @Html.DisplayFor(modelItem => item.Hastahane.Ad)
+                        </td>
+
+
+                        <td scope="row" class="text-nowrap">
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-sm " })
+
+                            @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    @*</div>*@

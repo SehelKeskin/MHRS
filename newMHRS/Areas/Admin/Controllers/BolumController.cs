@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using newMHRS;
+using newMHRS.Areas.Admin.Models;
 using newMHRS.Models;
 
 namespace newMHRS.Areas.Admin.Controllers
@@ -48,15 +49,33 @@ namespace newMHRS.Areas.Admin.Controllers
         // POST: Admin/Bolum/Create
         // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Ad,HastahaneId")] Bolum bolum)
+        public ActionResult Create(BolumView bolum)
         {
+           
+
+
             if (ModelState.IsValid)
             {
-                db.Bolums.Add(bolum);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var bolumler = new Bolum();
+                var bolumVarmi = db.Bolums.Where(x => x.Ad == bolum.Ad && x.HastahaneId == bolum.HastahaneId).Count();
+
+                if (bolumVarmi >= 1)
+                {
+                    ViewBag.AynıBolum = "Girmiş olduğunuz bölüm aynı hastahanede bulunmaktadır.";
+                }
+                else
+                {
+                    bolumler.Ad = bolum.Ad;
+                    bolumler.HastahaneId = bolum.HastahaneId;
+                   
+                    db.Bolums.Add(bolumler);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
             }
 
             ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", bolum.HastahaneId);
@@ -71,7 +90,8 @@ namespace newMHRS.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Bolum bolum = db.Bolums.Find(id);
-            if (bolum == null)
+            var bolumVarmi = db.Bolums.Where(x => x.Ad == bolum.Ad && x.HastahaneId == bolum.HastahaneId).Count();
+            if (bolum == null && bolumVarmi>=1)
             {
                 return HttpNotFound();
             }

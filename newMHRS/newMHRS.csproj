@@ -135,6 +135,7 @@
     <Compile Include="Areas\Admin\Controllers\HastaController.cs" />
     <Compile Include="Areas\Admin\Controllers\HastahaneController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Models\BolumView.cs" />
     <Compile Include="Areas\Admin\Models\HastahaneView.cs" />
     <Compile Include="Controllers\GirisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -162,6 +163,10 @@
     <Compile Include="Migrations\201908301218396_AdminClasHata.cs" />
     <Compile Include="Migrations\201908301218396_AdminClasHata.Designer.cs">
       <DependentUpon>201908301218396_AdminClasHata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908301531019_Bolum.cs" />
+    <Compile Include="Migrations\201908301531019_Bolum.Designer.cs">
+      <DependentUpon>201908301531019_Bolum.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminClass.cs" />
@@ -699,6 +704,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908301218396_AdminClasHata.resx">
       <DependentUpon>201908301218396_AdminClasHata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908301531019_Bolum.resx">
+      <DependentUpon>201908301531019_Bolum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

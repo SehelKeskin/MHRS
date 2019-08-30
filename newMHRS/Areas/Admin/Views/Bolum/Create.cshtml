@@ -1,43 +1,47 @@
-﻿@model newMHRS.Models.Bolum
+﻿@model newMHRS.Areas.Admin.Models.BolumView
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Bolum</h4>
+        <h4>  Bölüm Kaydı Oluştur</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HastahaneId, "HastahaneId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("HastahaneId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(model => model.HastahaneId, "Bölümün Bulunduğu Hastahane:", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownList("HastahaneId", null, "Seçim Yapınız", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.HastahaneId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Ad, "Bölüm Adı:", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+                @ViewBag.AynıBolum
+                @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Kaydet" class="btn btn-success" />
+                <a class="btn btn-primary" href="@Url.Action("Index","Bolum")">Listeye Geri Dön</a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
