@@ -1,83 +1,121 @@
-﻿@model newMHRS.Models.Doktor
+﻿@model newMHRS.Areas.Admin.Models.DoktorView
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
-@using (Html.BeginForm()) 
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Doktor</h4>
+        <h4>Doktor Kaydı Oluştur</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.Soyad, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Cinsiyet, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Cinsiyet, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EnumDropDownListFor(model => model.Cinsiyet, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Cinsiyet, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CepTel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.CepTel, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.CepTel, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CepTel, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HastahaneId, "HastahaneId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("HastahaneId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(model => model.HastahaneId, "Hastahane:", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+
+
+                @if (ViewBag.HastahaneList != null)
+                {
+                    @Html.DropDownList("HastahaneId", ViewBag.HastahaneList as SelectList, "--Seçim Yapınız.", htmlAttributes: new { @class = "form-control" })
+                }
+
                 @Html.ValidationMessageFor(model => model.HastahaneId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BolumId, "BolumId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("BolumId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(model => model.BolumId, "Bölüm:", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownList("BolumId", new SelectList(""), "--Seçim Yapınız.", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BolumId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Kaydet" class="btn btn-success" />
+                <a class="btn btn-primary" href="@Url.Action("Index","Doktor")">Listeye Geri Dön</a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    {
+
+
+    <script>
+    $(document).ready(function(){
+
+
+          $("#HastahaneId").change(function () {
+            var hastahaneId = $(this).val();
+            debugger
+            $.ajax({
+                method:"POST",
+               // type: "post",
+               // url: "/Randevu/GetIlceList?SehirId=" + sehirId,
+
+                 url: '@Url.Action("GetBolumList")' + "?HastahaneId=" + this.value,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#BolumId").empty();
+                    $("#BolumId").append(response);
+                }
+            })
+
+          })
+    })
+
+
+    </script>
+    }}

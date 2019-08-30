@@ -4,66 +4,77 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Hastahanenize Yeni Doktor Eklemek İçin Tıklayın.", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Bolum.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hastahane.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Soyad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cinsiyet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CepTel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover table-responsive">
+    <thead>
+        <tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bolum.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hastahane.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Soyad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cinsiyet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CepTel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.Ad)*@
+                <label>Doktor Ad</label>
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.Soyad)*@
+                <label>Soyad</label>
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.Cinsiyet)*@
+                <label>Cinsiyet</label>
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.CepTel)*@
+                <label>Cep Telefon</label>
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.Email)*@
+                <label>Email</label>
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.Hastahane.Ad)*@
+                <label>Çalıştığı Hastahane</label>
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.Bolum.Ad)*@
+                <label>Çalıştığı Bölüm</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Soyad)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Cinsiyet)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.CepTel)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Hastahane.Ad)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Bolum.Ad)
+            </td>
+
+            <td scope="row" class="text-nowrap">
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-sm " })
+                @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+        }
+    </tbody>
 </table>

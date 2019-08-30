@@ -42,9 +42,24 @@ namespace newMHRS.Areas.Admin.Controllers
         // GET: Admin/Doktor/Create
         public ActionResult Create()
         {
-            ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Name");
-            ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad");
+            //ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Ad");
+            //ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad");
+
+            ViewBag.HastahaneList = new SelectList(GetHastahaneList(), "Id", "Ad");
             return View();
+        }
+
+        public List<Hastahane> GetHastahaneList()
+        {
+            List<Hastahane> hastahaneler = db.Hastahanes.ToList();
+            return hastahaneler;
+        }
+
+        public ActionResult GetBolumList(int HastahaneId)
+        {
+            List<Bolum> selectList = db.Bolums.Where(x => x.HastahaneId == HastahaneId).ToList();
+            ViewBag.BolumList = new SelectList(selectList, "Id", "Ad");
+            return PartialView("DisplayBolum");
         }
 
         // POST: Admin/Doktor/Create
@@ -61,7 +76,7 @@ namespace newMHRS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Name", doktor.BolumId);
+            ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Ad", doktor.BolumId);
             ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", doktor.HastahaneId);
             return View(doktor);
         }
@@ -78,7 +93,7 @@ namespace newMHRS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Name", doktor.BolumId);
+            ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Ad", doktor.BolumId);
             ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", doktor.HastahaneId);
             return View(doktor);
         }
@@ -96,10 +111,11 @@ namespace newMHRS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Name", doktor.BolumId);
+            ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Ad", doktor.BolumId);
             ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", doktor.HastahaneId);
             return View(doktor);
         }
+
 
         // GET: Admin/Doktor/Delete/5
         public ActionResult Delete(int? id)
