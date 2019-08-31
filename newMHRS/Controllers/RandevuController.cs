@@ -37,24 +37,37 @@ namespace newMHRS.Controllers
             DateTime ileriTarih = DateTime.Now.AddDays(15);
             DateTime simdikiTarih = DateTime.Now;
 
-           
-            
 
             if (ModelState.IsValid)
             {
                 var randevu = new Randevu();
                 var hasta = (int)Session["hastaId"];
+                DateTime gelenTarih = cascadingClass.Tarih;
                 var randevuSayi = db.Randevus.Where(x => x.HastaId == hasta && (x.Tarih == cascadingClass.Tarih)).Count();
-                var bolumSayi = db.Randevus.Where(x => x.HastaId == hasta && (x.Tarih == cascadingClass.Tarih) && (x.BolumId == cascadingClass.BolumId)).Count();
-
-
-                // randevu.HastaId = Response.Cookies["hastaId"].Value.ToString();                
-                if (cascadingClass.Tarih <= simdikiTarih || cascadingClass.Tarih > ileriTarih)
+                var bolumSayi = db.Randevus.Where(x => x.HastaId == hasta && x.DoktorId == cascadingClass.DoktorId && (x.BolumId == cascadingClass.BolumId)).Count();
+                       
+                if (cascadingClass.Tarih > ileriTarih)
                 {
-                    ViewBag.TarihView = "Alacağınız randevu 15 günü geçemez. " + simdikiTarih.ToString("dd/MM/yyyy") + " ile " + ileriTarih.ToString("dd/MM/yyyy") + " arasında randevu alınız." + cascadingClass.Tarih;
+                    ViewBag.TarihView = "Alacağınız randevu 15 günü geçemez. " + simdikiTarih.ToString("dd/MM/yyyy") + " ile " + ileriTarih.ToString("dd/MM/yyyy") + " arasında randevu alınız.";
                 }
 
-                if (randevuSayi < 3 && bolumSayi < 1  )
+               else if (gelenTarih <= simdikiTarih)
+                {
+                    ViewBag.tarihKucuk = "Alacağınız randevu geçmiş tarihe ait olduğu için, alınamaz.";
+                }
+
+                else if (randevuSayi >= 3)
+                {
+                    ViewBag.FazlaRandevu = "1 Günde 3'den fazla Randevu Alamazınız.";
+                }
+                else if (bolumSayi >= 1)
+
+                {
+                    ViewBag.FazlaBolum = "Aynı doktordan 1 den fazla randevu alamazsınız.";
+                }
+
+               // if (randevuSayi < 3 && bolumSayi < 1 && ((gelenTarih>simdikiTarih)&&(gelenTarih<ileriTarih)))
+               else
                 {
                     randevu.HastaId = (int)Session["hastaId"];
                     randevu.Tarih = cascadingClass.Tarih;
@@ -71,15 +84,7 @@ namespace newMHRS.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                if (randevuSayi >= 3)
-                {
-                    ViewBag.FazlaRandevu = "1 Günde 3'den fazla Randevu Alamazınız.";
-                }
-                if (bolumSayi >= 1)
-              //  else
-                {
-                    ViewBag.FazlaBolum = "Aynı bölüme 1 den fazla randevu alamazsınız.";
-                }
+              
 
             }
 

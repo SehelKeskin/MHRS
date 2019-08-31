@@ -2,7 +2,7 @@
 
 @{
     //ViewBag.Title = "Create";
-    Layout = null;
+     Layout = null;
 
     // if (Response.Cookies["hastaId"].Value==null)
     //{
@@ -38,8 +38,9 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Tarih, new { htmlAttributes = new { @class = "form-control" } })
                 <label>@ViewBag.TarihView</label>
-                <label> @ViewBag.FazlaRandevu 646</label>
-              
+                <label> @ViewBag.FazlaRandevu</label>
+                <label> @ViewBag.tarihKucuk</label>
+
                 @Html.ValidationMessageFor(model => model.Tarih, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -87,7 +88,8 @@
             <div class="col-md-10">
                 @*@Html.DropDownList("BolumId", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.BolumId, new SelectList(""), "--Bölüm Seçiniz", new { @class = "form-control" })
-                <label>@ViewBag.FazlaBolum 545</label>
+                <label>@ViewBag.FazlaBolum</label>
+                <label>@ViewBag.aynıDokRan</label>
                 @Html.ValidationMessageFor(model => model.BolumId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -127,8 +129,15 @@
 </div>
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    {*@
+
+
+    <script>
     $(document).ready(function(){
         $("#SehirId").change(function () {
             var sehirId = $(this).val();
@@ -137,7 +146,7 @@
                 method:"POST",
                // type: "post",
                // url: "/Randevu/GetIlceList?SehirId=" + sehirId,
-        
+
                  url: '@Url.Action("GetIlceList")' + "?SehirId=" + this.value,
                 contentType: "html",
                 success: function (response) {
@@ -235,7 +244,7 @@
     })
 
 
-</script>
+    </script>
 
 
-
+    @*}}*@
