@@ -54,7 +54,7 @@
                 {
                     @Html.DropDownListFor(m => m.SehirId, ViewBag.SehirList as SelectList, "--Şehir seçiniz", new { @class = "form-control" })
                 }
-                <label>@ViewBag.FazlaBolum</label>
+                @*<label>@ViewBag.FazlaBolum</label>*@
                 @Html.ValidationMessageFor(model => model.SehirId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -108,6 +108,7 @@
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.DropDownListFor(m => m.SaatId, new SelectList(""), "--Saat Seçiniz", new { @class = "form-control" })
+                    @ViewBag.SaatDurum
                     @Html.ValidationMessageFor(model => model.SaatId, "", new { @class = "text-danger" })
                 </div>
             </div>

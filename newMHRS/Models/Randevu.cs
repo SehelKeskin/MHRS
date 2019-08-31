@@ -45,6 +45,7 @@ namespace newMHRS.Models
         [ForeignKey("DoktorId")]
         public virtual Doktor Doktor { get; set; }
 
+        [Required(ErrorMessage = "Lütfen Saat Alanını Seçiniz.Saat Seçimi yapamıyorsanız, doktora ait uygun saat bulunmamaktadır.")]
         public int? SaatId { get; set; }
         [ForeignKey("SaatId")]
         public virtual Saat Saat { get; set; }

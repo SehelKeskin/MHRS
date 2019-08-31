@@ -34,7 +34,7 @@ namespace newMHRS.Models
         [Display(Name = "Doktor:")]
         public int DoktorId { get; set; }
 
-      // [Required(ErrorMessage = "Lütfen Randevu Alacağınız Saati Seçiniz.")]
+       [Required(ErrorMessage = "Lütfen Saat Alanını Seçiniz. Saat Seçimi yapamıyorsanız, doktora ait uygun saat bulunmamaktadır.")]
        [Display(Name="Saat:")]
         public int SaatId { get; set; }
     }

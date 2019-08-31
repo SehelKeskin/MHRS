@@ -170,6 +170,18 @@
     <Compile Include="Migrations\201908301531019_Bolum.Designer.cs">
       <DependentUpon>201908301531019_Bolum.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908311052012_SaatDurumuEklendi.cs" />
+    <Compile Include="Migrations\201908311052012_SaatDurumuEklendi.Designer.cs">
+      <DependentUpon>201908311052012_SaatDurumuEklendi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908311113408_SaatDurumuEklendii.cs" />
+    <Compile Include="Migrations\201908311113408_SaatDurumuEklendii.Designer.cs">
+      <DependentUpon>201908311113408_SaatDurumuEklendii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908311115583_SaatErrorMessage.cs" />
+    <Compile Include="Migrations\201908311115583_SaatErrorMessage.Designer.cs">
+      <DependentUpon>201908311115583_SaatErrorMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminClass.cs" />
     <Compile Include="Models\Bolum.cs" />
@@ -588,6 +600,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908301531019_Bolum.resx">
       <DependentUpon>201908301531019_Bolum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908311052012_SaatDurumuEklendi.resx">
+      <DependentUpon>201908311052012_SaatDurumuEklendi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908311113408_SaatDurumuEklendii.resx">
+      <DependentUpon>201908311113408_SaatDurumuEklendii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908311115583_SaatErrorMessage.resx">
+      <DependentUpon>201908311115583_SaatErrorMessage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

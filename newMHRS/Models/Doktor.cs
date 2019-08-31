@@ -46,7 +46,7 @@ namespace newMHRS.Models
         //[ForeignKey("SaatId")]
         //public virtual Saat Saat { get; set; }
 
-            public virtual ICollection<Saat> Saats { get; set; }
+        public virtual ICollection<Saat> Saats { get; set; }
         public virtual ICollection<Randevu> Randevus { get; set; }
 
 

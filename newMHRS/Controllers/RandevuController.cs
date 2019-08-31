@@ -37,6 +37,9 @@ namespace newMHRS.Controllers
             DateTime ileriTarih = DateTime.Now.AddDays(15);
             DateTime simdikiTarih = DateTime.Now;
 
+           
+            
+
             if (ModelState.IsValid)
             {
                 var randevu = new Randevu();
@@ -46,12 +49,12 @@ namespace newMHRS.Controllers
 
 
                 // randevu.HastaId = Response.Cookies["hastaId"].Value.ToString();                
-                if (cascadingClass.Tarih < simdikiTarih || cascadingClass.Tarih > ileriTarih)
+                if (cascadingClass.Tarih <= simdikiTarih || cascadingClass.Tarih > ileriTarih)
                 {
                     ViewBag.TarihView = "Alacağınız randevu 15 günü geçemez. " + simdikiTarih.ToString("dd/MM/yyyy") + " ile " + ileriTarih.ToString("dd/MM/yyyy") + " arasında randevu alınız." + cascadingClass.Tarih;
                 }
 
-                if (randevuSayi < 3 && bolumSayi < 1)
+                if (randevuSayi < 3 && bolumSayi < 1  )
                 {
                     randevu.HastaId = (int)Session["hastaId"];
                     randevu.Tarih = cascadingClass.Tarih;
@@ -61,6 +64,9 @@ namespace newMHRS.Controllers
                     randevu.BolumId = cascadingClass.BolumId;
                     randevu.DoktorId = cascadingClass.DoktorId;
                     randevu.SaatId = cascadingClass.SaatId;
+                    var saatdeneme = db.Saats.Where(x => x.DoktorId == cascadingClass.DoktorId && x.SaatDurum == false).FirstOrDefault();
+                    saatdeneme.SaatDurum = true;
+
                     db.Randevus.Add(randevu);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -126,8 +132,18 @@ namespace newMHRS.Controllers
 
         public ActionResult GetSaatList(int DoktorId)
         {
-            List<Saat> selectList = db.Saats.Where(x => x.DoktorId == DoktorId).ToList();
-            ViewBag.SaatList = new SelectList(selectList, "Id", "SaatKac");
+            List<Saat> selectList = db.Saats.Where(x => x.DoktorId == DoktorId && x.SaatDurum==false).ToList();
+
+            if (selectList==null)
+            {
+                ViewBag.SaatDurum = "Seçtiğiniz Doktora uygun saat kalmamıştır.Farklı doktor deneyiniz.";
+            }
+            else
+            {
+                ViewBag.SaatList = new SelectList(selectList, "Id", "SaatKac");
+      
+            }
+
             return PartialView("DisplaySaat");
         }
 
