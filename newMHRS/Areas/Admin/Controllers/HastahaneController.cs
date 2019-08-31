@@ -66,6 +66,7 @@ namespace newMHRS.Areas.Admin.Controllers
                 {
                     ViewBag.AynıAd = "Daha önce böyle bir hastahane kaydı gerçekleştirilmiş.";
                 }
+              
                 else
                 {
                     hastahane.Ad = hastahaneView.Ad;

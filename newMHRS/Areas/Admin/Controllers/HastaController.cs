@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using newMHRS;
+using newMHRS.Areas.Admin.Models;
 using newMHRS.Models;
 
 namespace newMHRS.Areas.Admin.Controllers
@@ -49,16 +50,45 @@ namespace newMHRS.Areas.Admin.Controllers
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre")] Hasta hasta)
+        public ActionResult Create(HastaView hastaView)
         {
+            var bugun = DateTime.Now;
             if (ModelState.IsValid)
             {
-                db.Hastas.Add(hasta);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var hasta = new Hasta();
+                var hastaVarmi = db.Hastas.Where(x => x.Tc == hastaView.Tc).Count();
+
+                if(hastaVarmi>=1)
+                {
+                    ViewBag.hastaVarmis = "Sistemimizde girmiş olduğunuz hastanın kaydı vardır.";
+                }
+                else if (hastaView.DogumTarihi >= bugun)
+                {
+                    ViewBag.buyukTarih = "Doğum tarihiniz bugünden büyük bir tarih olamaz.";
+                }
+                else
+                {
+                    hasta.Tc = hastaView.Tc;
+                    hasta.Ad = hastaView.Ad;
+                    hasta.Soyad = hastaView.Soyad;
+                    hasta.CepTel = hastaView.CepTel;
+                    hasta.Mail = hastaView.Mail;
+                    hasta.Sifre = hastaView.Sifre;
+                    hasta.AnneAdi = hastaView.AnneAdi;
+                    hasta.BabaAdi = hastaView.BabaAdi;
+                    hasta.Cinsiyet = hastaView.Cinsiyet;
+                    hasta.DogumTarihi = hastaView.DogumTarihi;
+                    hasta.DogumYeri = hastaView.DogumYeri;
+                    hasta.TSifre = hastaView.TSifre;
+                    db.Hastas.Add(hasta);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+               
             }
 
-            return View(hasta);
+            return View(hastaView);
         }
 
         // GET: Admin/Hasta/Edit/5
@@ -81,7 +111,7 @@ namespace newMHRS.Areas.Admin.Controllers
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre")] Hasta hasta)
+        public ActionResult Edit([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre,TSifre")] Hasta hasta)
         {
             if (ModelState.IsValid)
             {
