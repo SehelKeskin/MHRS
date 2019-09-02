@@ -1,14 +1,14 @@
 ﻿@model newMHRS.Models.CascadingClass
 
 @{
-    //ViewBag.Title = "Create";
-    // Layout = null;
 
-    // if (Response.Cookies["hastaId"].Value==null)
-    //{
+ 
+  @*   @if (Response.Cookies["hastaId"].Value==null)
+    {
 
-    //    Response.Redirect("~/Login/Index");
-    //}
+        Response.Redirect("~/Login/Index");
+    }
+      *@
 }
 
 <h2>Create</h2>
@@ -24,6 +24,7 @@
 
         @*<h3>Hoşgeldin, Sn. @Response.Cookies["hastaId"].Value</h3>*@
 
+
         <h3>Hoşgeldin, Sn.@Session["hastaAd"] @Session["hastaSoyad"]</h3><!--ToString()-->
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -33,8 +34,9 @@
                     @Html.ValidationMessageFor(model => model.HastaId, "", new { @class = "text-danger" })
                 </div>
             </div>*@
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Tarih, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Tarih,"Tarih Seçiniz", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Tarih, new { htmlAttributes = new { @class = "form-control" } })
                 <label>@ViewBag.TarihView</label>
@@ -47,7 +49,7 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SehirId, "SehirId", htmlAttributes: new { @class = "control-label col-md-2", onchange = "LoadIlce(this)" })
+           @*@Html.LabelFor(model => model.SehirId, "Şehir Seçiniz", htmlAttributes: new { @class = "control-label col-md-2", onchange = "LoadIlce(this)" })*@
             <div class="col-md-10">
                 @*@Html.DropDownList("SehirId", null, htmlAttributes: new { @class = "form-control" })*@
 
@@ -61,7 +63,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IlceId, "IlceId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.IlceId, "İlçe Seçiniz", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @*@Html.DropDownList("IlceId", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.IlceId, new SelectList(""), "--İlçe Seçiniz", new { @class = "form-control" })
@@ -71,9 +73,8 @@
         </div>
 
 
-
         <div class="form-group">
-            @Html.LabelFor(model => model.HastahaneId, "HastahaneId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.HastahaneId, "Hastane Seçiniz", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @*@Html.DropDownList("HastahaneId", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.HastahaneId, new SelectList(""), "--Hastahane Seçiniz", new { @class = "form-control" })
@@ -84,7 +85,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BolumId, "BolumId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.BolumId, "Bölüm Seçiniz", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @*@Html.DropDownList("BolumId", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.BolumId, new SelectList(""), "--Bölüm Seçiniz", new { @class = "form-control" })
@@ -95,7 +96,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DoktorId, "DoktorId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.DoktorId, "Doktor Seçiniz", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @*@Html.DropDownList("DoktorId", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.DoktorId, new SelectList(""), "--Doktor Seçiniz", new { @class = "form-control" })
@@ -106,7 +107,7 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SaatId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.SaatId, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.DropDownListFor(m => m.SaatId, new SelectList(""), "--Saat Seçiniz", new { @class = "form-control" })

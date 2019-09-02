@@ -57,54 +57,8 @@ namespace newMHRS.Controllers
             return RedirectToAction("Index","Login");
         }
 
-        //[HttpPost]
-        //public ActionResult EkleHasta(string Tc, string Ad, string Soyad, Gender Cinsiyet, DateTime DogumTarihi, string DogumYeri, string AnneAdi, string BabaAdi, string CepTel, string SabitTel, string Mail, string Sifre)
-        //{
-        //    try
-        //    {
-        //        //if (ModelState.IsValid)
-        //        //{
-
-        //            using (var db = new ApplicationDbContext())
-        //            {
-        //                Hasta yeniHasta = new Hasta();
-        //                yeniHasta.Tc = Tc;
-        //                yeniHasta.Ad = Ad;
-        //                yeniHasta.Soyad = Soyad;
-        //                //  yeniHasta.Cinsiyet = (Gender)Enum.Parse(typeof(Gender), Cinsiyet, true);
-        //                yeniHasta.Cinsiyet = Cinsiyet;
-
-        //                yeniHasta.DogumTarihi = DogumTarihi;
-        //                yeniHasta.DogumYeri = DogumYeri;
-        //                yeniHasta.AnneAdi = AnneAdi;
-        //                yeniHasta.BabaAdi = BabaAdi;
-        //                yeniHasta.CepTel = CepTel;
-        //                yeniHasta.SabitTel = SabitTel;
-        //                yeniHasta.Mail = Mail;
-        //                yeniHasta.Sifre = Sifre;
-
-        //                db.Hastas.Add(yeniHasta);
-        //                db.SaveChanges();
-        //             return Json(true);
-
-        //            }
-        //        //}
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(false);
-        //    }
-        //}
-
-
-        //public ActionResult EkleHasta()
-        //{
-        //    var hasta = new Hasta();
-        //    return View(hasta);
-        //}
-
-      
-
+       
+ 
         public ActionResult Create()
         {
             var hasta = new Hasta();
