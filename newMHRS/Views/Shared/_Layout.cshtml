@@ -1,193 +1,136 @@
 ﻿<!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
-    @*****************************https://bootsnipp.com/snippets/Kr5yV********************@
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title -Hastahane Randevu Sistemi</title>
+    <title>Hasta Randevu Sistemi</title>
+    <link href="~/Content/menu.css" rel="stylesheet" />
 
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
-    <!-- Page Title -->
-    <title>Medino</title>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="~/assets/images/logo/favicon.png" type="image/x-icon">
-
-    <!-- CSS Files -->
-
-    <link rel="stylesheet" href="~/assets/css/animate-3.7.0.css">
-    <link rel="stylesheet" href="~/assets/css/font-awesome-4.7.0.min.css">
-    <link rel="stylesheet" href="~/assets/css/bootstrap-4.1.3.min.css">
-    <link rel="stylesheet" href="~/assets/css/owl-carousel.min.css">
-    @*<link rel="stylesheet" href="~/assets/css/jquery.datetimepicker.min.css">*@
-    <link rel="stylesheet" href="~/assets/css/linearicons.css">
-    <link rel="stylesheet" href="~/assets/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">*@@*menü geldi popup yok*@
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -- gelmiyor menü*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    @*@Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")*@
+
 
 </head>
-<body>
-  
-    <header class="header-area">
+<body style="background-color:#eee">
 
-        <div id="header"@* id="home"*@>
-
+    <div id="nav">
+        <div class="navbar navbar-inverse navbar-fixed-top" data-spy="affix" data-offset-top="100">
             <div class="container">
-                <div class="row align-items-center justify-content-between d-flex">
-                    <div id="logo">
-                        <a href="index.html"><img src="~/assets/images/logo/logo.png" alt="" title="" /></a>
-                    </div>
-                    <nav id="nav-menu-container">
-                        <ul class="nav-menu">
-                            <li class="menu-active"><a href="index.html">Randevu Al</a></li>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand " href="@Url.Action("Create","Randevu")">
 
-                            <li class="menu-has-children">
-                                <a href="">Hesap Bilgilerim</a>
-                                <ul>
-                                    <li><a href="about.html">Kimlik Bilgileri</a></li>
-                                    <li><a href="elements.html">İletişim Bilgileri</a></li>
-                                    <li><a href="elements.html">Parola İşlemleri</a></li>
-                                    <li><a href="elements.html">Güvenlik İşlemleri</a></li>
-                                </ul>
-                            </li>
-
-
-
-                            <li><a href="contact.html">Randevu Geçmişi</a></li>
-
-                            <li>
-                                <p>
-
-
-                                    @*<button type="button" class="btn btn-default btn-md">*@
-                                    <a href="@Url.Action("LogOut","Login")" data-target="#logoutModal">
-                                        <span class="glyphicon glyphicon-log-out">
-                                            ÇIKIŞ
-                                        </span>
-                                    </a>
-                            <li> <h6>Hoşgeldin, Sn.@Session["hastaAd"] @Session["hastaSoyad"]</h6></li>
-
-
-
-
-
-
-                        </ul>
-                    </nav><!-- #nav-menu-container -->
+                        <img class="img-responsive logo" src="~/Content/mhrsicon.png" />
+                    </a>
                 </div>
+                <div id="navbar" class="collapse navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-expand-md">
+                        <li @*class="active"*@>
+                            <a class="fa fa-user-md" style="font-size:18px;" href="@Url.Action("Create","Randevu")"> Randevu Al</a>
+                        </li>
+                        <li class="dropdown show">
+                            <a href="#about" class="fa fa-user-circle-o dropdown-toggle " role="button" data-toggle="dropdown" style="font-size:18px;"> Hesap Bilgilerim</a>
+                            @*<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    Hesap Bilgilerim
+                                </a>*@
+
+                            <div class="dropdown-menu btn-secondary" style="background-color:#333">
+                                <a class="dropdown-item fa fa-id-card " style="font-size:17px; padding-left:10px;color:white" href="#"> Kimlik Bilgileri</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item fa fa-phone" href="#" style="font-size:17px;padding-left:10px;color:white">  &nbsp;İletişim Bilgileri</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item fa fa-key " href="#" style="font-size:17px;padding-left:10px;color:white"> Parola İşlemleri</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#contact" class="fa fa-history" style="font-size:18px;"> Randevu Geçmişi</a>
+                        </li>
+
+
+                        <li class="dropdown show">
+                            <a href="#about" class="fa fa-user dropdown-toggle " role="button" data-toggle="dropdown" style="font-size:18px;"> Sn. @Session["hastaAd"] @Session["hastaSoyad"]</a>
+                            <div class="dropdown-menu btn-secondary" style="background-color:#333">
+                                <a class="dropdown-item glyphicon glyphicon-log-out" style="font-size:17px; padding-left:10px;color:white" href="#"> Çıkış Yap</a>
+                                @*<a href="" data-toggle="modal" data-target="#exampleModal">Çıkış Yap</a>*@
+                            </div>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+                <!--/.nav-collapse -->
             </div>
+            <!--/.contatiner -->
         </div>
-    </header>
-    <div @*class="container body-content"*@>
-
-        @RenderBody()
-        <hr />
-        <!-- Footer Area Starts -->
-        <footer class="footer-area section-padding">
-            <div class="footer-widget">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-2 col-lg-3">
-                            <div class="single-widget-home mb-5 mb-lg-0">
-                                <h3 class="mb-4">top products</h3>
-                                <ul>
-                                    <li class="mb-2 "><a href="#">managed website</a></li>
-                                    <li class="mb-2"><a href="#">managed reputation</a></li>
-                                    <li class="mb-2"><a href="#">power tools</a></li>
-                                    <li><a href="#">marketing service</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        @*<div class="col-xl-5 offset-xl-1 col-lg-6">
-                            <div class="single-widget-home mb-5 mb-lg-0">
-                                <h3 class="mb-4">newsletter</h3>
-                                <p class="mb-4">You can trust us. we only send promo offers, not a single.</p>
-                                <form action="#">
-                                    <input type="email" placeholder="Your email here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email here'" required>
-                                    <button type="submit" class="template-btn">subscribe now</button>
-                                </form>
-                            </div>
-                        </div>*@
-                        <div class="col-xl-3 offset-xl-1 col-lg-3">
-                            <div class="single-widge-home">
-                                <h3 class="mb-4">instagram feed</h3>
-
-                                <div class="feed">
-                                    <img src="~/assets/images/feed1.jpg" alt="feed">
-                                    <img src="~/assets/images/feed2.jpg" alt="feed">
-                                    <img src="~/assets/images/feed3.jpg" alt="feed">
-                                    <img src="~/assets/images/feed4.jpg" alt="feed">
-                                    <img src="~/assets/images/feed5.jpg" alt="feed">
-                                    <img src="~/assets/images/feed6.jpg" alt="feed">
-                                    <img src="~/assets/images/feed7.jpg" alt="feed">
-                                    <img src="~/assets/images/feed8.jpg" alt="feed">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-6">
-                            <span>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Footer Area End -->
-        <!-- Javascript -->
-
-
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="~/Scripts/jquery-3.4.1.js"></script>
-        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-        @*<script src="~/Scripts/popper.js"></script>
-        <script src="~/Scripts/popper.min.js"></script>
-        <script src="~/Scripts/popper-utils.js"></script>*@
-  
-        @*<script src="~/assets/js/vendor/bootstrap-4.1.3.min.js"></script>*@
-        <script src="~/assets/js/vendor/gmaps.min.js"></script>
-        @*<script src="~/assets/js/vendor/jquery-2.2.4.min.js"></script>
-        <script src="~/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
-        <script src="~/assets/js/vendor/jquery.nice-select.min.js"></script>*@
-        <script src="~/assets/js/vendor/owl-carousel.min.js"></script>
-        <script src="~/assets/js/vendor/superfish.min.js"></script>
-        <script src="~/assets/js/vendor/wow.min.js"></script>
-        @*<script src="~/assets/js/main.js"></script>*@
-
-
-        @*<script src="~/Areas/Content/jquery.min.js"></script>*@
-        @*<script src="~/Scripts/jquery-3.3.1.js"></script>
-        <script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
-        @*<script src="~/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
-        <script src="~/assets/js/vendor/jquery.nice-select.min.js"></script>
-
-        @*<script src="~/assets/js/vendor/jquery-2.2.4.min.js"></script>
-        @*<script src="~/Areas/Content/jquery.easing.min.js"></script>*@
-
-
-
     </div>
 
-    @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")*@
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+            </div>
+            <!-- /row -->
+
+            <div class="container">
+           
+
+             
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>@*bootsraptan önce jquery çağır. önce js sonra diğerleri eklenmeli.*@
+    @*<script src="~/Scripts/popper.min.js"></script>*@
+
+
+    @*<script src="~/Scripts/popper.js"></script>*@
+
+
+
+
+
     @RenderSection("scripts", required: false)
+    <script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 150) {
+                //alert('hi');
+                $('.logo').height(100);
+
+            }
+            else {
+                $('.logo').height(100);
+            }
+        });
+
+  
+
+    </script>
 </body>
 </html>
