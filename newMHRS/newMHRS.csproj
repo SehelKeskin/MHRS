@@ -140,6 +140,7 @@
     <Compile Include="Areas\Admin\Models\HastahaneView.cs" />
     <Compile Include="Areas\Admin\Models\HastaView.cs" />
     <Compile Include="Controllers\GirisController.cs" />
+    <Compile Include="Controllers\HastaBilgiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RandevuController.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Models\Doktor.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Hasta.cs" />
+    <Compile Include="Models\HastaEditViewModel.cs" />
     <Compile Include="Models\Hastahane.cs" />
     <Compile Include="Models\IdAd.cs" />
     <Compile Include="Models\Ilce.cs" />
@@ -571,6 +573,11 @@
     <Content Include="Views\Shared\DisplayDoktor.cshtml" />
     <Content Include="Views\Shared\DisplaySaat.cshtml" />
     <Content Include="Views\Randevu\Deneme.cshtml" />
+    <Content Include="Views\HastaBilgi\Create.cshtml" />
+    <Content Include="Views\HastaBilgi\Delete.cshtml" />
+    <Content Include="Views\HastaBilgi\Details.cshtml" />
+    <Content Include="Views\HastaBilgi\Edit.cshtml" />
+    <Content Include="Views\HastaBilgi\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
