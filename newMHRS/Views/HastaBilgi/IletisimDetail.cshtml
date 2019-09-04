@@ -1,8 +1,45 @@
 ﻿@model newMHRS.Models.Hasta
 
 @{
-    ViewBag.Title = "IletisimDetail";
+    ViewBag.Title = "Details";
 }
 
-<h2>IletisimDetail</h2>
 
+
+<div>
+
+    <hr />
+
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" style="text-align:center">
+                    İletişim Bilgileri
+                </a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action">           Cep Tel : @Html.DisplayFor(model => model.CepTel)</a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Mail : @ViewBag.Mail</a>
+                <a href="@Url.Action("Iletisim","HastaBilgi")" style="text-align:center" class="list-group-item list-group-item-action ">
+
+                    <input type="submit" value="Bilgileri Düzenle" class="btn btn-success" />
+
+                </a>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+
+    </div>
+
+
+
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+
+</p>

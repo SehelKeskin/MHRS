@@ -34,7 +34,7 @@ namespace newMHRS.Models
         [Display(Name = "Cinsiyetiniz:")]
         public Gender Cinsiyet { get; set; }
 
-
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         [Display(Name = "Doğum Tarihiniz:")]
         public DateTime DogumTarihi { get; set; }

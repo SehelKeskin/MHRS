@@ -22,13 +22,34 @@ namespace newMHRS.Controllers
         }
 
         // GET: HastaBilgi/Details/5
+        
         public ActionResult Details(int? id)
         {
+            id = (int)Session["hastaId"];
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Hasta hasta = db.Hastas.Find(id);
+            if (hasta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(hasta);
+        }
+
+
+        public ActionResult IletisimDetail(int? id)
+        {
+            id = (int)Session["hastaId"];
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Hasta hasta = db.Hastas.Find(id);
+            ViewBag.Mail = hasta.Mail;
             if (hasta == null)
             {
                 return HttpNotFound();
@@ -62,6 +83,7 @@ namespace newMHRS.Controllers
         // GET: HastaBilgi/Edit/5
         public ActionResult Edit(int? id)
         {
+            id = (int)Session["hastaId"];
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +102,39 @@ namespace newMHRS.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre,TSifre")] Hasta hasta)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(hasta).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(hasta);
+        }
+
+
+
+        public ActionResult Iletisim(int? id)
+        {
+            id = (int)Session["hastaId"];
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Hasta hasta = db.Hastas.Find(id);
+            if (hasta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(hasta);
+        }
+
+        // POST: HastaBilgi/Edit/5
+        // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
+        // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Iletisim([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre,TSifre")] Hasta hasta)
         {
             if (ModelState.IsValid)
             {

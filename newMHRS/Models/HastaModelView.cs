@@ -8,8 +8,6 @@ namespace newMHRS.Models
 {
     public class HastaModelView
     {
-        [Display(Name = "Id:")]
-        //      [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         //artık ıd tc oldu.

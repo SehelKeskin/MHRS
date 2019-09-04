@@ -4,111 +4,49 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+
 
 <div>
-    <h4>Hasta</h4>
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Tc)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Tc)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ad)
-        </dt>
+    <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.Ad)
-        </dd>
+        <div class="col-md-2"></div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Soyad)
-        </dt>
+        <div class="col-md-8">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" style="text-align:center">
+                    Kimlik Bilgileri
+                </a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action">           Ad : @Html.DisplayFor(model => model.Ad)</a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Soyad : @Html.DisplayFor(model => model.Soyad)</a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Cinsiyet :  @Html.DisplayFor(model => model.Cinsiyet)</a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action ">Doğum Tarihi :  @Html.DisplayFor(model => model.DogumTarihi)</a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action ">Doğum Yeri :  @Html.DisplayFor(model => model.DogumYeri)</a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action ">Anne Adı :  @Html.DisplayFor(model => model.AnneAdi)</a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action ">Baba Adı :  @Html.DisplayFor(model => model.BabaAdi)</a>
+                @*<a href="@Html.ActionLink("Edit", "Edit", new { id = Model.Id })" style="text-align:center" class="list-group-item list-group-item-action ">Edit</a>*@
 
-        <dd>
-            @Html.DisplayFor(model => model.Soyad)
-        </dd>
+                <a href="@Url.Action("Edit","HastaBilgi")" style="text-align:center" class="list-group-item list-group-item-action ">
+ 
+                            <input type="submit" value="Bilgileri Düzenle" class="btn btn-success" />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cinsiyet)
-        </dt>
+                </a>
+           
+            </div>
+        </div>
+      <div class="col-md-2">
 
-        <dd>
-            @Html.DisplayFor(model => model.Cinsiyet)
-        </dd>
+      </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DogumTarihi)
-        </dt>
+    </div>
+   
 
-        <dd>
-            @Html.DisplayFor(model => model.DogumTarihi)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DogumYeri)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DogumYeri)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AnneAdi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AnneAdi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BabaAdi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BabaAdi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CepTel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CepTel)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sifre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sifre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TSifre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TSifre)
-        </dd>
-
-    </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+ 
 </p>

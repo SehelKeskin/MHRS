@@ -57,6 +57,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -190,8 +193,8 @@
     <Compile Include="Models\Doktor.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Hasta.cs" />
-    <Compile Include="Models\HastaEditViewModel.cs" />
     <Compile Include="Models\Hastahane.cs" />
+    <Compile Include="Models\HastaModelView.cs" />
     <Compile Include="Models\IdAd.cs" />
     <Compile Include="Models\Ilce.cs" />
     <Compile Include="Models\Randevu.cs" />
@@ -578,6 +581,8 @@
     <Content Include="Views\HastaBilgi\Details.cshtml" />
     <Content Include="Views\HastaBilgi\Edit.cshtml" />
     <Content Include="Views\HastaBilgi\Index.cshtml" />
+    <Content Include="Views\HastaBilgi\Iletisim.cshtml" />
+    <Content Include="Views\HastaBilgi\IletisimDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
