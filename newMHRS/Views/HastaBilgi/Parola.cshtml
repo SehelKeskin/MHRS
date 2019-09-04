@@ -1,0 +1,34 @@
+﻿@model newMHRS.Models.Hasta
+@{
+    ViewBag.Title = "Parola";
+}
+
+<h2>Parola</h2>
+
+<div class="row">
+
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active" style="text-align:center">
+                Parola İşlemleri
+            </a>
+            <a href="#" style="text-align:center" class="list-group-item list-group-item-action">           Parolanız : @Html.EditorFor(model => model.Sifre)</a>
+            <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Mail : @ViewBag.Mail</a>
+            <a href="@Url.Action("Iletisim","HastaBilgi")" style="text-align:center" class="list-group-item list-group-item-action ">
+
+                <input type="submit" value="Bilgileri Düzenle" class="btn btn-success" />
+
+            </a>
+
+        </div>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+
+</div>
+
+
+
