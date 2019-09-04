@@ -197,6 +197,7 @@
     <Compile Include="Models\HastaModelView.cs" />
     <Compile Include="Models\IdAd.cs" />
     <Compile Include="Models\Ilce.cs" />
+    <Compile Include="Models\ParolaViewModel.cs" />
     <Compile Include="Models\Randevu.cs" />
     <Compile Include="Models\Saat.cs" />
     <Compile Include="Models\Sehir.cs" />
@@ -583,6 +584,7 @@
     <Content Include="Views\HastaBilgi\Index.cshtml" />
     <Content Include="Views\HastaBilgi\Iletisim.cshtml" />
     <Content Include="Views\HastaBilgi\IletisimDetail.cshtml" />
+    <Content Include="Views\HastaBilgi\Parola.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

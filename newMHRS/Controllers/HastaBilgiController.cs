@@ -21,8 +21,72 @@ namespace newMHRS.Controllers
             return View(db.Hastas.ToList());
         }
 
+        public ActionResult Parola()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Parola(ParolaViewModel parola)
+        {
+           int id = (int)Session["hastaId"];
+
+                var sifreVarmi = db.Hastas.Where(x => x.Sifre == parola.MSifre && x.Id == id).FirstOrDefault();
+
+            if (sifreVarmi == null)
+            {
+
+                ViewBag.Mesaj = "Mevcut şifrenizi doğru girdiğinizden emin olunuz.";
+                return View();
+            }
+            if (ModelState.IsValid)
+            {
+                ViewBag.tamamMesaj = "Şifreniz Başarıyla Değiştirildi.";
+                sifreVarmi.Sifre = parola.YSifre;
+                sifreVarmi.TSifre = parola.TSifre;
+                db.SaveChanges();
+
+                // return View();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(parola);
+            //if (ModelState.IsValid)
+            //{
+
+
+            //    if (sifreVarmi == null)
+
+            //    {
+
+            //        ViewBag.Mesaj = "Mevcut şifrenizi doğru girdiğinizden emin olunuz.";
+            //        return View();
+            //    }
+            //    else
+            //    {
+            //        ViewBag.tamamMesaj = "Şifreniz Başarıyla Değiştirildi.";
+            //        sifreVarmi.Sifre = parola.YSifre;
+            //        sifreVarmi.TSifre = parola.TSifre;
+            //        db.SaveChanges();
+
+            //        // return View();
+
+            //        return RedirectToAction("Index", "Home");
+
+
+            //    }
+            //}
+
+
+
+
+
+
+        }
         // GET: HastaBilgi/Details/5
-        
+
         public ActionResult Details(int? id)
         {
             id = (int)Session["hastaId"];
