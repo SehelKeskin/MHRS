@@ -70,16 +70,32 @@
                 @Html.DisplayFor(modelItem => item.Sehir.Ad) -   @Html.DisplayFor(modelItem => item.Ilce.Ad)
             </td>
 
- 
-
+           
 
             <td scope="row">
-                @Html.DisplayFor(modelItem => item.IptalMi)
+                @Html.DisplayFor(modelItem => item.RandevuDurum)
             </td>
-            <td scope="row">
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+            <td scope="row" class="text-nowrap">
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+
+                @if (item.RandevuDurum == "Geçmiş Randevu" || item.RandevuDurum == "İptal")
+                {
+                    //  <a class="btn btn-primary" href="@Html.ActionLink("Yeni Randevu", "Edit", new { id = item.Id })"></a>
+                    <a class="btn btn-primary" href="@Url.Action("Edit","Randevu",new { id=item.Id})">+ Randevu Al</a>
+
+                    //  @Html.ActionLink("Yeni Randevu", "Edit", new { id = item.Id })
+                }
+                else if (item.RandevuDurum == "Aktif")
+                {
+            <a class="btn btn-danger" style="text-align:left; width:75%" href="@Url.Action("Delete","Randevu",new { id=item.Id})">- İptal Et  </a>
+                 //   @Html.ActionLink("İptal Et", "Delete", new { id = item.Id })
+                }
+                else
+                {
+                    <label>Hata</label>
+                }
+
             </td>
         </tr>
         }

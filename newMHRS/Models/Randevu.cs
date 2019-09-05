@@ -50,7 +50,8 @@ namespace newMHRS.Models
         [ForeignKey("SaatId")]
         public virtual Saat Saat { get; set; }
 
-
+        [Display(Name ="Randevu Durumu")]
+        public string RandevuDurum { get; set; }
         public bool IptalMi { get; set; }
 
     }

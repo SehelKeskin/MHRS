@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201908311115583_SaatErrorMessage.Designer.cs">
       <DependentUpon>201908311115583_SaatErrorMessage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909051839048_RandevuDurumAlanıEklendi.cs" />
+    <Compile Include="Migrations\201909051839048_RandevuDurumAlanıEklendi.Designer.cs">
+      <DependentUpon>201909051839048_RandevuDurumAlanıEklendi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminClass.cs" />
     <Compile Include="Models\Bolum.cs" />
@@ -625,6 +629,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908311115583_SaatErrorMessage.resx">
       <DependentUpon>201908311115583_SaatErrorMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909051839048_RandevuDurumAlanıEklendi.resx">
+      <DependentUpon>201909051839048_RandevuDurumAlanıEklendi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -16,9 +16,34 @@ namespace newMHRS.Controllers
 
         // GET: Randevu
         public ActionResult Index()
-        {
-            var randevus = db.Randevus.Include(r => r.Bolum).Include(r => r.Doktor).Include(r => r.Hasta).Include(r => r.Hastahane).Include(r => r.Ilce).Include(r => r.Sehir);
-            return View(randevus.ToList());
+        {            //if (randevu.Tarih > tarih)
+                     //{
+                     //    randevu.RandevuDurum = "Geçmiş Randevu";
+                     //}
+                     // var randevus = db.Randevus.Include(r => r.Bolum).Include(r => r.Doktor).Include(r => r.Hasta).Include(r => r.Hastahane).Include(r => r.Ilce).Include(r => r.Sehir);
+            var id = (int)Session["hastaId"];
+            var sonuc = db.Randevus.Where(x=>x.HastaId==id);
+          
+         //   Randevu randevu = db.Randevus.Find(id);
+            var tarih = DateTime.Now;
+
+
+            foreach (var item in sonuc)
+            {
+                if (item.Tarih < tarih)
+                {
+                    item.RandevuDurum = "Geçmiş Randevu";
+                
+                }
+
+                //if (item.RandevuDurum=="Geçmiş Randevu")
+                //{
+                    
+                //}
+            }
+            db.SaveChanges();
+            // return View(randevus.ToList());
+            return View(sonuc.ToList());
 
          
         }
@@ -255,11 +280,17 @@ namespace newMHRS.Controllers
         // GET: Randevu/Delete/5
         public ActionResult Delete(int? id)
         {
+            Randevu randevu = db.Randevus.Find(id);
+            var tarih = DateTime.Now;
+            if (randevu.Tarih > tarih)
+            {
+                randevu.RandevuDurum = "Geçmiş Randevu";
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Randevu randevu = db.Randevus.Find(id);
+          
             if (randevu == null)
             {
                 return HttpNotFound();
@@ -272,8 +303,13 @@ namespace newMHRS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+           
             Randevu randevu = db.Randevus.Find(id);
-            db.Randevus.Remove(randevu);
+            //var saatDurum = db.Saats.Where(x => x.DoktorId == cascadingClass.DoktorId && x.SaatDurum == false).FirstOrDefault();
+            //saatdeneme.SaatDurum = true;
+
+            randevu.RandevuDurum = "İptal";
+           // db.Randevus.Remove(randevu);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
