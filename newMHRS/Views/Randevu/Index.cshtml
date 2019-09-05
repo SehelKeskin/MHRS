@@ -9,67 +9,79 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Bolum.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Doktor.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hasta.Tc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hastahane.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ilce.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sehir.Ad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tarih)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IptalMi)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+             
+                <label>Randevu Tarihi</label>
+                @*@Html.DisplayNameFor(model => model.Bolum.Ad)*@
+            </th>
+            <th scope="col">
+                <label>Doktor Adı</label>
+                @*@Html.DisplayNameFor(model => model.Doktor.Ad)*@
+            </th>
+            <th scope="col">
+                <label>Hastane Adı</label>
+                @*@Html.DisplayNameFor(model => model.Hasta.Tc)*@
+            </th>
+            <th scope="col">
+                <label>Bölüm Adı</label>
+                @*@Html.DisplayNameFor(model => model.Hastahane.Ad)*@
+            </th>
+            <th scope="col">
+                <label>Adres</label>
+                @*@Html.DisplayNameFor(model => model.Ilce.Ad)*@
+            </th>
+            @*<th scope="col">
+                <label>İlçe</label>
+                @Html.DisplayNameFor(model => model.Sehir.Ad)
+            </th>*@
+            <th scope="col">
+                <label>Randevu Durumu</label>
+                @*@Html.DisplayNameFor(model => model.Tarih)*@
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.IptalMi)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bolum.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Doktor.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hasta.Tc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hastahane.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ilce.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sehir.Ad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tarih)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IptalMi)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Tarih)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Doktor.Ad)
+                @Html.DisplayFor(modelItem => item.Doktor.Soyad)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Hastahane.Ad)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Bolum.Ad)
+            </td>
 
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Sehir.Ad) -   @Html.DisplayFor(modelItem => item.Ilce.Ad)
+            </td>
+
+ 
+
+
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.IptalMi)
+            </td>
+            <td scope="row">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+        }
+</tbody>
 </table>
