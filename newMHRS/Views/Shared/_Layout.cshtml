@@ -1,119 +1,186 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasta Randevu Sistemi</title>
-    <link href="~/Content/menu.css" rel="stylesheet" />
+    
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
-    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
-    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">*@@*menü geldi popup yok*@
-    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -- gelmiyor menü*@
+    <title>Mhrs - Admin</title>
+    <!-- Custom fonts for this template-->
+    <link href="~/Areas/Content/all.min.css" rel="stylesheet" />
+    <link href="~/Areas/Content/google.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template-->
+    <link href="~/Areas/Content/sb-admin-2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 
+    <!-- Custom styles for this template-->
+
+
 
 </head>
-<body style="background-color:#eee">
 
-    <div id="nav">
-        <div class="navbar navbar-inverse navbar-fixed-top" data-spy="affix" data-offset-top="100">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+<body id="page-top" class="bg-light">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <!-- Page Wrapper -->
+            <div id="wrapper">
+
+                <!-- Sidebar -->
+                <!-- End of Sidebar -->
+                <!-- Content Wrapper -->
+                <div id="content-wrapper" class="d-flex flex-column">
+
+                    <!-- Main Content -->
+                    @*<div id="content">*@
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light align-self-center">
+                        <a class="navbar-brand" href="@Url.Action("Create","Randevu")">
+                            <img class="img-responsive logo" style="height:80px" src="~/Content/mhrsicon.png" />
+                            MHRS
+
+
+
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item @*active*@">
+                                    <a class="nav-link fa fa-user-md" href="@Url.Action("Create","Randevu")"> Randevu Al @*<span class="sr-only">(current)</span>*@</a>
+                                </li>
+
+
+
+                                <li class="nav-item">
+                                    <a class="nav-link fa fa-history rgba-red-strong"  href="@Url.Action("Index","Randevu")"> Randevu Geçmişi</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle fa fa-user-circle-o" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Hesap Bilgilerim
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item fa fa-id-card" href="@Url.Action("Details","HastaBilgi")"> Kimlik Bilgilerim</a>
+                                        <a class="dropdown-item dropdown-item fa fa-phone" href="@Url.Action("IletisimDetail","HastaBilgi")"> İletişim Bilgilerim</a>
+                                        <a class="dropdown-item dropdown-item fa fa-key" href="@Url.Action("Parola","HastaBilgi")"> Parola İşlemlerim </a>
+                                        @*<div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>*@
+                                    </div>
+
+
+
+
+
+                                </li>
+
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle fa fa fa-user" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Sn. @Session["hastaAd"] @Session["hastaSoyad"]
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item fa fa-id-card" href="@Url.Action("Details","HastaBilgi")"> Bilgilerim</a>
+
+
+                                        <div class="dropdown-divider "></div>
+                                        <a class="dropdown-item fa fa-sign-out" data-toggle="modal" data-target="#logoutModal" href="#">Çıkış Yap</a>
+                                    </div>
+
+
+                                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Çıkış</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Çıkış yapmak istediğinize emin misiniz?</div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hayır</button>
+                                                    <a class="btn btn-primary" href="@Url.Action("LogOut","Login")">Evet</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </li>
+
+                            </ul>
+                           
+                        </div>
+                    </nav>
+                    <!-- End of Topbar -->
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        @* <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>*@
+                        @RenderBody()
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+                <!-- Footer -->
+                @*<footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; Your Website 2019</span>
+                            </div>
+                        </div>
+                    </footer>*@
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+    @*</div>*@
+    <!-- End of Page Wrapper -->
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Çıkış</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
                     </button>
-                    <a class="navbar-brand " href="@Url.Action("Create","Randevu")">
-
-                        <img class="img-responsive logo" src="~/Content/mhrsicon.png" />
-                    </a>
                 </div>
-                <div id="navbar" class="collapse navbar-collapse">
-
-                    <ul class="nav navbar-nav navbar-expand-md">
-                        <li @*class="active"*@>
-                            <a class="fa fa-user-md" style="font-size:18px;" href="@Url.Action("Create","Randevu")"> Randevu Al</a>
-                        </li>
-                        <li class="dropdown show">
-                            <a href="#about" class="fa fa-user-circle-o dropdown-toggle " role="button" data-toggle="dropdown" style="font-size:18px;"> Hesap Bilgilerim</a>
-                            @*<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                    Hesap Bilgilerim
-                                </a>*@
-
-                            <div class="dropdown-menu btn-secondary" style="background-color:#333">
-                               <a class="dropdown-item fa fa-id-card " style="font-size:17px; padding-left:10px;color:white" href="@Url.Action("Details","HastaBilgi")"> Kimlik Bilgileri</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item fa fa-phone"  style="font-size:17px;padding-left:10px;color:white" href="@Url.Action("IletisimDetail","HastaBilgi")">  &nbsp;İletişim Bilgileri</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item fa fa-key " href="@Url.Action("Parola","HastaBilgi")" style="font-size:17px;padding-left:10px;color:white"> Parola İşlemleri</a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <a href="@Url.Action("Index","Randevu")" class="fa fa-history" style="font-size:18px;"> Randevu Geçmişi</a>
-                        </li>
-
-
-                        <li class="dropdown show">
-                            <a href="#about" class="fa fa-user dropdown-toggle " role="button" data-toggle="dropdown" style="font-size:18px;"> Sn. @Session["hastaAd"] @Session["hastaSoyad"]</a>
-                            <div class="dropdown-menu btn-secondary" style="background-color:#333">
-                                <a class="dropdown-item glyphicon glyphicon-log-out" style="font-size:17px; padding-left:10px;color:white" href="#"> Çıkış Yap</a>
-                                @*<a href="" data-toggle="modal" data-target="#exampleModal">Çıkış Yap</a>*@
-                            </div>
-                        </li>
-
-
-                    </ul>
-
+                <div class="modal-body">Çıkış yapmak istediğinize emin misiniz?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hayır</button>
+                    <a class="btn btn-primary" href="@Url.Action("AdminLogout","Home")">Evet</a>
                 </div>
-
-                <!--/.nav-collapse -->
-            </div>
-            <!--/.contatiner -->
-        </div>
-    </div>
-
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-            </div>
-            <!-- /row -->
-
-            <div class="container">
-           
-
-             
-                @RenderBody()
-
             </div>
         </div>
     </div>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Areas/Content/jquery.min.js"></script>
+    <script src="~/Areas/Content/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Areas/Content/jquery.easing.min.js"></script>
 
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Custom scripts for all pages-->
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>@*bootsraptan önce jquery çağır. önce js sonra diğerleri eklenmeli.*@
-    @*<script src="~/Scripts/popper.min.js"></script>*@
-
-
-    @*<script src="~/Scripts/popper.js"></script>*@
-
-
+    <script src="~/Areas/Content/sb-admin-2.min.js"></script>
 
 
 
@@ -130,7 +197,7 @@
             }
         });
 
-  
+
 
     </script>
 </body>

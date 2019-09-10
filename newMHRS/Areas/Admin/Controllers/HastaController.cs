@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using newMHRS;
 using newMHRS.Areas.Admin.Models;
 using newMHRS.Models;
@@ -23,6 +24,8 @@ namespace newMHRS.Areas.Admin.Controllers
         {
             return View(db.Hastas.ToList());
         }
+
+
 
         // GET: Admin/Hasta/Details/5
         public ActionResult Details(int? id)
