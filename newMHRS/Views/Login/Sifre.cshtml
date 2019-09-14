@@ -1,8 +1,79 @@
-﻿@model newMHRS.Models.Hasta
-
+﻿@model newMHRS.Areas.Admin.Models.HastaView
 @{
-    ViewBag.Title = "Sifre";
+    Layout = null;
 }
 
-<h2>Sifre</h2>
+<!DOCTYPE html>
 
+<html lang="tr">
+<head>
+    <link href="~/Content/hastaGiris.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Şifremi Unuttum</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+
+</head>
+<body>
+
+
+    <div id="login-div">
+        @using (Html.BeginForm("Sifre", "Login", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="wrapper fadeInDown">
+                <div id="formContent">
+                    <!-- Tabs Titles -->
+                    <!-- Icon -->
+                    <div class="fadeIn first">
+                        <img style="width:180px" src="~/Content/mhrsicon.png" id="icon" alt="User Icon" />
+
+                    </div>
+                    <br /><br />
+                    <!-- Login Form -->
+                    <form>
+
+                        <label style="color:dodgerblue;font-size:20px;font-family:'Times New Roman', Times, serif">Şifreni Yenile</label><br /><br />
+                        <label style="color:dodgerblue;font-size:17px;font-family:'Times New Roman', Times, serif">Mailiniz :</label>
+                        @Html.TextBoxFor(model => model.Mail, new { @class = "fadeIn second", @id = "login", @name = "login" })
+                        <label class="field-validation-error text-danger ">
+                            @Html.ValidationMessageFor(model => model.Mail)
+
+                        </label>
+                        @ViewBag.Message
+                        @ViewBag.Error<br />
+
+
+
+                        @*<input type="text" id="password" class="fadeIn third" name="login" placeholder="password">*@
+                        <input type="submit" class="fadeIn fourth" value="Şifremi Gönder">
+                    </form>
+
+                    <!-- Remind Passowrd -->
+                    <div id="formFooter">
+
+                        <a class="underlineHover" href="@Url.Action("Index", "Login")">Geri Dön</a>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+    </div>
+
+    <script>
+
+
+    </script>
+
+</body>
+
+</html>

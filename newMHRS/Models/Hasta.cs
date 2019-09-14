@@ -59,6 +59,7 @@ namespace newMHRS.Models
         [MaxLength(50)]
         [Display(Name = "E-Mailiniz :")]
         [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage ="Mail adresinizi giriniz.")]
         public string Mail { get; set; }
 
         [MaxLength(50)]

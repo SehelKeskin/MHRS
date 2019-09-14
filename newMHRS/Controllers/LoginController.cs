@@ -16,7 +16,51 @@ namespace newMHRS.Controllers
             return View();
         }
 
+        public ActionResult Sifre()
+        {
+            return View();
+        }
 
+
+
+        [HttpPost]//post işleminde çalışıyor.
+        public ActionResult Sifre(HastaView model)
+        {
+            var sifree = new Guid();
+            if (ModelState.IsValid)//hata var mı kontrol ediyor dataanationda.
+            {
+                try
+                {
+                    System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage();
+
+                    mailMessage.From = new System.Net.Mail.MailAddress("sehelcigdem@gmail.com", "Sehel KESKİN");
+                    mailMessage.Subject = "İletişim Formu: " + model.Ad + " ";
+
+                    mailMessage.To.Add("sehelcigdem@gmail.com");
+                    string body;
+                    body = "Ad Soyad: " + model.Ad + " " + model.Soyad + "<br />";
+                    //body += "E-posta: " + model.Email + "<br />";
+                    //body += "Telefon: " + model.Phone + "<br />";
+                    body += "Şifreniz: " + sifree + "<br />";
+                    body += "Tarih: " + DateTime.Now.ToString("dd MMMM yyyy") + "<br />";
+                    mailMessage.IsBodyHtml = true;
+                    mailMessage.Body = body;
+
+                    System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
+                    smtp.Credentials = new System.Net.NetworkCredential("mhrSytem@gmail.com", "hastaRandevu");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mailMessage);
+                    ViewBag.Message = "Mesajınız gönderildi. Teşekkür ederiz.";
+
+                }
+                catch
+                {
+                    ViewBag.Error = "Form gönderimi başarısız oldu tekrar deneriniz.";
+
+                }
+            }
+            return View(model);
+        }
 
 
         [HttpPost]

@@ -52,6 +52,7 @@ namespace newMHRS.Areas.Admin.Models
         [DataType(DataType.PhoneNumber)]
         public string CepTel { get; set; }
 
+        [Required(ErrorMessage ="Mail Alanını Boş Geçemezsiniz.")]
         [MaxLength(50)]
         [Display(Name = "E-Mail:")]
         [DataType(DataType.EmailAddress)]

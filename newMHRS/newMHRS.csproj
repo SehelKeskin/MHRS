@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201909051839048_RandevuDurumAlanıEklendi.Designer.cs">
       <DependentUpon>201909051839048_RandevuDurumAlanıEklendi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909142120263_eposta.cs" />
+    <Compile Include="Migrations\201909142120263_eposta.Designer.cs">
+      <DependentUpon>201909142120263_eposta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminClass.cs" />
     <Compile Include="Models\Bolum.cs" />
@@ -369,6 +373,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\hastaGiris.css" />
     <Content Include="Content\menu.css" />
     <Content Include="Content\mhrsicon.png" />
     <Content Include="favicon.ico" />
@@ -587,6 +592,7 @@
     <Content Include="Views\HastaBilgi\Iletisim.cshtml" />
     <Content Include="Views\HastaBilgi\IletisimDetail.cshtml" />
     <Content Include="Views\HastaBilgi\Parola.cshtml" />
+    <Content Include="Views\Login\Sifre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -630,6 +636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909051839048_RandevuDurumAlanıEklendi.resx">
       <DependentUpon>201909051839048_RandevuDurumAlanıEklendi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909142120263_eposta.resx">
+      <DependentUpon>201909142120263_eposta.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
