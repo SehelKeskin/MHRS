@@ -65,9 +65,9 @@ namespace newMHRS.Areas.Admin.Controllers
                 {
                     ViewBag.hastaVarmis = "Sistemimizde girmiş olduğunuz hastanın kaydı vardır.";
                 }
-                else if (hastaView.DogumTarihi >= bugun)
+                else if (hastaView.DogumTarihi < bugun)
                 {
-                    ViewBag.buyukTarih = "Doğum tarihiniz bugünden büyük bir tarih olamaz.";
+                    ViewBag.buyukTarih = "Doğum tarihiniz bugünden küçük bir tarih olamaz.";
                 }
                 else
                 {

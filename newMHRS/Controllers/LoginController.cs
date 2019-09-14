@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using newMHRS.Areas.Admin.Models;
 using newMHRS.Models;
 
 namespace newMHRS.Controllers
@@ -61,56 +62,52 @@ namespace newMHRS.Controllers
  
         public ActionResult Create()
         {
-            var hasta = new Hasta();
-            return View(hasta);
+            
+            return View();
         }
 
         [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Create(Hasta hasta)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(HastaView hastaView)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var bugun = DateTime.Now;
             if (ModelState.IsValid)
             {
+                var hasta = new Hasta();
+                var hastaVarmi = db.Hastas.Where(x => x.Tc == hastaView.Tc).Count();
 
-                using (var db = new ApplicationDbContext())
+                if (hastaVarmi >= 1)
                 {
-                    var tcVarmi = db.Hastas.Where(x => x.Tc.Contains(hasta.Tc)).FirstOrDefault();
-                    //   var sifreEs = db.Hastas.Where(x=>x.Sifre.CompareTo(hasta.TSifre));
-                    // var query = db.Hastas.Where(x=>x.Sifre==hasta.Sifre&& x.TSifre==hasta.TSifre).FirstOrDefault();
-                    //var sifreEs = db.Hastas.Where(x => x.Sifre == hasta.Sifre && x.TSifre == hasta.TSifre).FirstOrDefault();
-                    // var sifreEs = db.Hastas.Where(x => x.Sifre==x.TSifre ).FirstOrDefault();
-                   // var query = from c in db.Hastas where c.Sifre.Equals(c.TSifre) select c;
-
-                   // var query = from c in db.Hastas where hasta.Sifre.Equals(hasta.TSifre) select c;
-                    // var sifreEs=  db.Hastas.Where(x=>x.)
-
-                    if (tcVarmi != null)
-                    {
-                        ViewBag.tcVar = "tc var";
-                        return View("Create", hasta);
-
-                    }
-
-                    //if (query!=null)
-                    //{
-                    //    ViewBag.SifreEslesmiyor = "Şifreler eşleşmiyor";
-                    //}
-
-                    if((tcVarmi==null)/*&&(query==null)*/) 
-                    {
-                        db.Hastas.Add(hasta);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-
-                    }
-
-                    //return Json(true);
+                    ViewBag.hastaVarmis = "Sistemimizde girmiş olduğunuz hastanın kaydı vardır.";
                 }
+                else if (hastaView.DogumTarihi < bugun)
+                {
+                    ViewBag.buyukTarih = "Doğum tarihiniz bugünden küçük bir tarih olamaz.";
+                }
+                else
+                {
+                    hasta.Tc = hastaView.Tc;
+                    hasta.Ad = hastaView.Ad;
+                    hasta.Soyad = hastaView.Soyad;
+                    hasta.CepTel = hastaView.CepTel;
+                    hasta.Mail = hastaView.Mail;
+                    hasta.Sifre = hastaView.Sifre;
+                    hasta.AnneAdi = hastaView.AnneAdi;
+                    hasta.BabaAdi = hastaView.BabaAdi;
+                    hasta.Cinsiyet = hastaView.Cinsiyet;
+                    hasta.DogumTarihi = hastaView.DogumTarihi;
+                    hasta.DogumYeri = hastaView.DogumYeri;
+                    hasta.TSifre = hastaView.TSifre;
+                    db.Hastas.Add(hasta);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+
             }
 
-            return View(hasta);
-           // return RedirectToAction("Index");
-            //return Json(false);
+            return View(hastaView);
         }
 
     }
