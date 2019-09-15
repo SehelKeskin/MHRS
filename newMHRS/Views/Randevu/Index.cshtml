@@ -7,31 +7,31 @@
 
 
 
-<p>
+@*<p>
     @Html.ActionLink("Yeni Randevu Almak İçin Tıklayın", "Create")
-</p>
+</p>*@
 <table class="table table-hover">
     <thead>
-        <tr>
+        <tr style="color:white" class="btn-primary">
             <th scope="col">
 
                 <label>Randevu Tarihi</label>
 
             </th>
             <th scope="col">
-                <label>Doktor Adı</label>
+                <label>Doktor<br /> Adı</label>
 
             </th>
             <th scope="col">
-                <label>Hastane Adı</label>
+                <label>Hastane <br />Adı</label>
 
             </th>
             <th scope="col">
-                <label>Bölüm Adı</label>
+                <label>Bölüm <br />Adı</label>
 
             </th>
             <th scope="col">
-                <label>Adres</label>
+                <label>Randevu <br /> Adresi</label>
 
             </th>
 
@@ -80,7 +80,7 @@
                     @if (item.RandevuDurum == "Geçmiş Randevu" || item.RandevuDurum == "İptal")
                     {
                         //  <a class="btn btn-primary" href="@Html.ActionLink("Yeni Randevu", "Edit", new { id = item.Id })"></a>
-                        <a class="btn btn-primary" href="@Url.Action("Edit","Randevu",new { id=item.Id})">+ Randevu Al</a>
+                        <a class="btn btn-primary" href="@Url.Action("Create","Randevu",new { id=item.Id})">+ Randevu Al</a>
 
                         //  @Html.ActionLink("Yeni Randevu", "Edit", new { id = item.Id })
                     }

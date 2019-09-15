@@ -5,7 +5,7 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <title>Login V15</title>
     <meta charset="UTF-8">
@@ -33,34 +33,51 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Areas/Content/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Areas/Content/css/main.css">
+    
+    
+    <link href="~/Content/hastaGiris.css" rel="stylesheet" />
     <!--===============================================================================================-->
 </head>
 <body>
-    <div class="container">
+    @*<div class="container">*@
+    <div id="login-div">
 
-        @ViewBag.Mesaj
-        @ViewBag.Var
         @using (Html.BeginForm("AdminLogin", "Home", FormMethod.Post))
         {
-            <div class="form-group">
+            <div class="wrapper fadeInDown">
+                <div id="formContent">
+                    <div class="fadeIn first">
+                     
+                        @*<a href="@Url.Action("Index","Home")">*@
+                        <img style="width:180px" src="~/Content/mhrsicon.png" id="icon" alt="User Icon" />
+                        @*</a>*@
+                    </div>
+                    <br /><br />
 
-                @Html.LabelFor(m => m.Tc)
-                @Html.TextBoxFor(m => m.Tc, new { @class = "form-control", placeholder = "Tc'niz" })
+                          <form>
 
+                              <label class="fa fa-user " style="margin-left:20px;color:dodgerblue;font-size:25px">  Admin Girişi </label>
+                              <label style="margin-left:14px;color:dodgerblue;font-size:15px">TC :</label>
+                              @Html.TextBoxFor(model => model.Tc, new { @class = "fadeIn second", @id = "login", @name = "login" })
+                              <label class="field-validation-error text-danger">
+                                  @Html.ValidationMessageFor(model => model.Tc)
+                              </label><br />
+                              <label style="margin-left:5px;color:dodgerblue;font-size:15px">Şifre :</label>
+                              @Html.TextBoxFor(model => model.Sifre, new { @class = "fadeIn third", @id = "password", @name = "login" })
+                              <label class="field-validation-error text-danger">
+                                  @Html.ValidationMessageFor(model => model.Sifre)
+                                  @ViewBag.Message<br />
+
+                                  @ViewBag.Mesaj <br />
+                                  @ViewBag.Var
+                              </label>
+                           
+                              <input type="submit" class="fadeIn fourth" value="Giriş">
+                          </form>
+                  
+                </div>
             </div>
 
-            <div class="form-group">
-
-                @Html.LabelFor(m => m.Sifre)
-                @Html.PasswordFor(m => m.Sifre, new { @class = "form-control", placeholder = "Şifreniz" })
-
-            </div>
-
-
-
-            <button type="submit" class="login100-form-btn">
-                Giriş Yap
-            </button>
 
 
 

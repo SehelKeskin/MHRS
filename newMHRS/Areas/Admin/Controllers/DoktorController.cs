@@ -138,6 +138,8 @@ namespace newMHRS.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Doktor doktor = db.Doktors.Find(id);
+            //Saat saat = db.Saats.Where(x=>x.DoktorId==id).FirstOrDefault();
+            //db.Saats.Remove(saat);
             db.Doktors.Remove(doktor);
             db.SaveChanges();
             return RedirectToAction("Index");

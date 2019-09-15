@@ -6,12 +6,13 @@
 <!DOCTYPE html>
 
 <html lang="tr">
-<head >
+<head>
     <link href="~/Content/hastaGiris.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
     <title>MHRS</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -30,7 +31,8 @@
                  
                           <form>
 
-                              <label class="field-validation-error text-danger">@ViewBag.Message</label><br />
+                              <label class="fa fa-user" style="margin-left:20px;color:dodgerblue;font-size:25px">  Hasta Girişi </label><br />
+                         
 
                               <label style="margin-left:14px;color:dodgerblue;font-size:15px">TC :</label>
                               @Html.TextBoxFor(model => model.Tc, new { @class = "fadeIn second", @id = "login", @name = "login" })
@@ -38,10 +40,11 @@
                                   @Html.ValidationMessageFor(model => model.Tc)
                               </label><br />
                               <label style="margin-left:5px;color:dodgerblue;font-size:15px">Şifre :</label>
-                              @Html.TextBoxFor(model => model.Sifre, new { @class = "fadeIn third",@id = "password", @name = "login" })
-                              <label class="field-validation-error text-danger">
-                                  @Html.ValidationMessageFor(model => model.Sifre)
-                              </label>
+                              @Html.TextBoxFor(model => model.Sifre, new { @class = "fadeIn third", @id = "password", @name = "login" })
+                          <label class="field-validation-error text-danger">
+                              @Html.ValidationMessageFor(model => model.Sifre)<br />
+                            @ViewBag.Message<br />
+                          </label>
                               <br />
                               <br />
                               <input type="submit" class="fadeIn fourth" value="Giriş">
