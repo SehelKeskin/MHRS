@@ -1,15 +1,4 @@
 ﻿@model newMHRS.Models.CascadingClass
-
-@{
-
-
-    @*   @if (Response.Cookies["hastaId"].Value==null)
-        {
-
-            Response.Redirect("~/Login/Index");
-        }
-    *@
-}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -22,12 +11,6 @@
 
     
         <hr />
-
-        @*<h3>Hoşgeldin, Sn. @Response.Cookies["hastaId"].Value</h3>*@
-
-
-        @*<h3>Hoşgeldin, Sn.@Session["hastaAd"] @Session["hastaSoyad"]</h3>*@
-        <!--ToString()-->
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
   
         <div class="form-group">
@@ -46,13 +29,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SehirId, "Şehir :", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("SehirId", null, htmlAttributes: new { @class = "form-control" })*@
-
+ 
                 @if (ViewBag.SehirList != null)
                 {
                     @Html.DropDownListFor(m => m.SehirId, ViewBag.SehirList as SelectList, "--Seçim Yapınız", new { @class = "form-control" })
                 }
-                @*<label>@ViewBag.FazlaBolum</label>*@
                 <label></label>
                 @Html.ValidationMessageFor(model => model.SehirId, "", new { @class = "text-danger" })
             </div>
@@ -61,7 +42,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IlceId, "İlçe :", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("IlceId", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.IlceId, new SelectList(""), "--Seçim Yapınız", new { @class = "form-control" })
                 <label>@ViewBag.IlceView</label>
                 @Html.ValidationMessageFor(model => model.IlceId, "", new { @class = "text-danger" })
@@ -72,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HastahaneId, "Hastane :", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("HastahaneId", null, htmlAttributes: new { @class = "form-control" })*@
+
                 @Html.DropDownListFor(m => m.HastahaneId, new SelectList(""), "--Seçim Yapınız", new { @class = "form-control" })
                 <label>@ViewBag.HastahaneView</label>
 
@@ -83,7 +63,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BolumId, "Bölüm :", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("BolumId", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.BolumId, new SelectList(""), "--Seçim Yapınız", new { @class = "form-control" })
                 <label>@ViewBag.FazlaBolum</label>
                 <label>@ViewBag.aynıDokRan</label>
@@ -116,7 +95,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Kaydet" class="btn btn-success" />
-                <a class="btn btn-primary" href="@Url.Action("Index","Randevu")">Listeye Geri Dön</a>
+                <a class="btn btn-primary" href="@Url.Action("Index","Randevu")">Randevularım</a>
             </div>
         </div>
     </div>

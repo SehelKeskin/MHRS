@@ -577,7 +577,6 @@
     <Content Include="Views\Randevu\Details.cshtml" />
     <Content Include="Views\Randevu\Edit.cshtml" />
     <Content Include="Views\Randevu\Index.cshtml" />
-    <Content Include="Views\Randevu\Index1.cshtml" />
     <Content Include="Views\Shared\DisplayIlce.cshtml" />
     <Content Include="Views\Shared\DisplayHastahane.cshtml" />
     <Content Include="Views\Shared\DisplayBolum.cshtml" />

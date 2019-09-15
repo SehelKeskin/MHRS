@@ -11,9 +11,7 @@
           margin-right:30%;
         
            
-        }
-
-        
+        }    
     </style>
 @using (Html.BeginForm("Parola", "HastaBilgi", FormMethod.Post))
 {<div>
@@ -28,25 +26,31 @@
         <div class="col-md-8">
 
 
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active" style="text-align:center">
-                        Parola İşlemleri
-                    </a>
-                    <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Şifreniz (*) :  @Html.TextBoxFor(m => m.MSifre, new { @class = "form-control en" @*placeholder = "Şifreniz"*@ }) @Html.ValidationMessageFor(model => model.MSifre, "", new { @class = "text-danger" }) @ViewBag.Mesaj</a>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" style="text-align:center">
+                    Parola İşlemleri
+                </a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action">
+                    Şifreniz (*) :  @Html.TextBoxFor(m => m.MSifre, new
+                    {
+                        @class = "form-control en"@*placeholder = "Şifreniz"*@})
+                    <label class="text-danger">
+                        @Html.ValidationMessageFor(model => model.MSifre, "", new { @class = "text-danger" }) @ViewBag.Mesaj
+                    </label>  </a>
 
-                    <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Yeni Şifreniz (*) :  @Html.TextBoxFor(m => m.YSifre, new { @class = "form-control en" }) @Html.ValidationMessageFor(model => model.YSifre, "", new { @class = "text-danger" })</a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Yeni Şifreniz (*) :  @Html.TextBoxFor(m => m.YSifre, new { @class = "form-control en" }) @Html.ValidationMessageFor(model => model.YSifre, "", new { @class = "text-danger" })</a>
 
-                    <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Yeni Şifreniz (*) :  @Html.TextBoxFor(m => m.TSifre, new { @class = "form-control en"}) @Html.ValidationMessageFor(model => model.TSifre, "", new { @class = "text-danger" })</a>
-
-
-                    <a style="text-align:center" class="list-group-item list-group-item-action ">
-
-                        <input type="submit" value="Şifremi Güncelle" class="btn btn-success" />
-
-                    </a>
+                <a href="#" style="text-align:center" class="list-group-item list-group-item-action">Yeni Şifreniz (*) :  @Html.TextBoxFor(m => m.TSifre, new { @class = "form-control en" }) @Html.ValidationMessageFor(model => model.TSifre, "", new { @class = "text-danger" })</a>
 
 
-                </div>
+                <a style="text-align:center" class="list-group-item list-group-item-action ">
+
+                    <input type="submit" value="Şifremi Güncelle" class="btn btn-success" />
+
+                </a>
+
+
+            </div>
           
         </div>
         <div class="col-md-2">

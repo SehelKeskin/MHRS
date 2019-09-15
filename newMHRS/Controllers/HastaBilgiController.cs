@@ -18,11 +18,19 @@ namespace newMHRS.Controllers
         // GET: HastaBilgi
         public ActionResult Index()
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View(db.Hastas.ToList());
         }
 
         public ActionResult Parola()
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
@@ -30,7 +38,8 @@ namespace newMHRS.Controllers
         [HttpPost]
         public ActionResult Parola(ParolaViewModel parola)
         {
-           int id = (int)Session["hastaId"];
+        
+            int id = (int)Session["hastaId"];
 
                 var sifreVarmi = db.Hastas.Where(x => x.Sifre == parola.MSifre && x.Id == id).FirstOrDefault();
 
@@ -53,35 +62,6 @@ namespace newMHRS.Controllers
             }
 
             return View(parola);
-            //if (ModelState.IsValid)
-            //{
-
-
-            //    if (sifreVarmi == null)
-
-            //    {
-
-            //        ViewBag.Mesaj = "Mevcut şifrenizi doğru girdiğinizden emin olunuz.";
-            //        return View();
-            //    }
-            //    else
-            //    {
-            //        ViewBag.tamamMesaj = "Şifreniz Başarıyla Değiştirildi.";
-            //        sifreVarmi.Sifre = parola.YSifre;
-            //        sifreVarmi.TSifre = parola.TSifre;
-            //        db.SaveChanges();
-
-            //        // return View();
-
-            //        return RedirectToAction("Index", "Home");
-
-
-            //    }
-            //}
-
-
-
-
 
 
         }
@@ -89,6 +69,11 @@ namespace newMHRS.Controllers
 
         public ActionResult Details(int? id)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             id = (int)Session["hastaId"];
 
             if (id == null)
@@ -106,6 +91,10 @@ namespace newMHRS.Controllers
 
         public ActionResult IletisimDetail(int? id)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             id = (int)Session["hastaId"];
 
             if (id == null)
@@ -124,6 +113,10 @@ namespace newMHRS.Controllers
         // GET: HastaBilgi/Create
         public ActionResult Create()
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
@@ -134,6 +127,10 @@ namespace newMHRS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre,TSifre")] Hasta hasta)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 db.Hastas.Add(hasta);
@@ -147,6 +144,10 @@ namespace newMHRS.Controllers
         // GET: HastaBilgi/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             id = (int)Session["hastaId"];
             if (id == null)
             {
@@ -171,7 +172,7 @@ namespace newMHRS.Controllers
             {
                 db.Entry(hasta).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             return View(hasta);
         }
@@ -180,6 +181,10 @@ namespace newMHRS.Controllers
 
         public ActionResult Iletisim(int? id)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             id = (int)Session["hastaId"];
             if (id == null)
             {
@@ -200,11 +205,15 @@ namespace newMHRS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Iletisim([Bind(Include = "Id,Tc,Ad,Soyad,Cinsiyet,DogumTarihi,DogumYeri,AnneAdi,BabaAdi,CepTel,Mail,Sifre,TSifre")] Hasta hasta)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(hasta).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IletisimDetail");
             }
             return View(hasta);
         }
@@ -212,6 +221,10 @@ namespace newMHRS.Controllers
         // GET: HastaBilgi/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

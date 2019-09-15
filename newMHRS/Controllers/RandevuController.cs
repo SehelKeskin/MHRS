@@ -12,19 +12,24 @@ using newMHRS.Models;
 namespace newMHRS.Controllers
 {
     public class RandevuController : Controller
-    {        private ApplicationDbContext db = new ApplicationDbContext();
+    {
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Randevu
         public ActionResult Index()
-        {            //if (randevu.Tarih > tarih)
-                     //{
-                     //    randevu.RandevuDurum = "Geçmiş Randevu";
-                     //}
-                     // var randevus = db.Randevus.Include(r => r.Bolum).Include(r => r.Doktor).Include(r => r.Hasta).Include(r => r.Hastahane).Include(r => r.Ilce).Include(r => r.Sehir);
+        {
+
+          if(  Session["hastaId"]==null)
+            {
+                return RedirectToAction("Index","Login");
+            }
+        
+     
+            // var randevus = db.Randevus.Include(r => r.Bolum).Include(r => r.Doktor).Include(r => r.Hasta).Include(r => r.Hastahane).Include(r => r.Ilce).Include(r => r.Sehir);
             var id = (int)Session["hastaId"];
             var sonuc = db.Randevus.Where(x=>x.HastaId==id);
           
-         //   Randevu randevu = db.Randevus.Find(id);
+    
             var tarih = DateTime.Now;
 
 
@@ -50,6 +55,10 @@ namespace newMHRS.Controllers
 
         public ActionResult Create()
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             ViewBag.SehirList = new SelectList(GetSehirList(), "Id", "Ad");//sehirler tablondaki alanların!!
             return View();
         }
@@ -116,13 +125,6 @@ namespace newMHRS.Controllers
             return View(cascadingClass);
         }
 
-
-
-        public ActionResult Index1()
-        {
-            ViewBag.SehirList = new SelectList(GetSehirList(), "Id", "Ad");//sehirler tablondaki alanların!!
-            return View();
-        }
         public List<Sehir> GetSehirList()
         {
             List<Sehir> sehirler = db.Sehirs.ToList();
@@ -187,6 +189,10 @@ namespace newMHRS.Controllers
         // GET: Randevu/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -202,6 +208,10 @@ namespace newMHRS.Controllers
         // GET: Randevu/Create
         public ActionResult Create1()
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             ViewBag.BolumId = new SelectList(db.Bolums, "Id", "Ad");
             ViewBag.DoktorId = new SelectList(db.Doktors, "Id", "Ad");
             ViewBag.HastaId = new SelectList(db.Hastas, "Id", "Tc");
@@ -210,10 +220,6 @@ namespace newMHRS.Controllers
             ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad");
             return View();
         }
-
-        // POST: Randevu/Create
-        // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
-        // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create1([Bind(Include = "Id,Tarih,SehirId,IlceId,HastaId,HastahaneId,BolumId,DoktorId,IptalMi")] Randevu randevu)
@@ -237,6 +243,10 @@ namespace newMHRS.Controllers
         // GET: Randevu/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -252,6 +262,7 @@ namespace newMHRS.Controllers
             ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", randevu.HastahaneId);
             ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad", randevu.IlceId);
             ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad", randevu.SehirId);
+            ViewBag.SaatId = new SelectList(db.Saats, "Id", "SaatKac", randevu.SaatId);
             return View(randevu);
         }
 
@@ -260,8 +271,12 @@ namespace newMHRS.Controllers
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Tarih,SehirId,IlceId,HastaId,HastahaneId,BolumId,DoktorId,IptalMi")] Randevu randevu)
+        public ActionResult Edit([Bind(Include = "Id,Tarih,SehirId,IlceId,HastaId,HastahaneId,BolumId,DoktorId,IptalMi,SaatId")] Randevu randevu)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(randevu).State = EntityState.Modified;
@@ -274,12 +289,17 @@ namespace newMHRS.Controllers
             ViewBag.HastahaneId = new SelectList(db.Hastahanes, "Id", "Ad", randevu.HastahaneId);
             ViewBag.IlceId = new SelectList(db.Ilces, "Id", "Ad", randevu.IlceId);
             ViewBag.SehirId = new SelectList(db.Sehirs, "Id", "Ad", randevu.SehirId);
+            ViewBag.SaatId = new SelectList(db.Saats, "Id", "SaatKac", randevu.SaatId);
             return View(randevu);
         }
 
         // GET: Randevu/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["hastaId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             Randevu randevu = db.Randevus.Find(id);
             var tarih = DateTime.Now;
             if (randevu.Tarih > tarih)

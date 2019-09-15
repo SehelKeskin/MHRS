@@ -1,48 +1,46 @@
 ﻿@model IEnumerable<newMHRS.Models.Randevu>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "MHRS";
+
 }
 
-<h2>Index</h2>
+
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Yeni Randevu Almak İçin Tıklayın", "Create")
 </p>
 <table class="table table-hover">
     <thead>
         <tr>
             <th scope="col">
-             
+
                 <label>Randevu Tarihi</label>
-                @*@Html.DisplayNameFor(model => model.Bolum.Ad)*@
+
             </th>
             <th scope="col">
                 <label>Doktor Adı</label>
-                @*@Html.DisplayNameFor(model => model.Doktor.Ad)*@
+
             </th>
             <th scope="col">
                 <label>Hastane Adı</label>
-                @*@Html.DisplayNameFor(model => model.Hasta.Tc)*@
+
             </th>
             <th scope="col">
                 <label>Bölüm Adı</label>
-                @*@Html.DisplayNameFor(model => model.Hastahane.Ad)*@
+
             </th>
             <th scope="col">
                 <label>Adres</label>
-                @*@Html.DisplayNameFor(model => model.Ilce.Ad)*@
+
             </th>
-            @*<th scope="col">
-                <label>İlçe</label>
-                @Html.DisplayNameFor(model => model.Sehir.Ad)
-            </th>*@
+
             <th scope="col">
                 <label>Randevu Durumu</label>
-                @*@Html.DisplayNameFor(model => model.Tarih)*@
+
             </th>
             <th scope="col">
-                @*@Html.DisplayNameFor(model => model.IptalMi)*@
+
             </th>
             <th></th>
         </tr>
@@ -51,53 +49,53 @@
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.Tarih)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.Doktor.Ad)
-                @Html.DisplayFor(modelItem => item.Doktor.Soyad)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.Hastahane.Ad)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.Bolum.Ad)
-            </td>
+            <tr>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Tarih)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Doktor.Ad)
+                    @Html.DisplayFor(modelItem => item.Doktor.Soyad)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Hastahane.Ad)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Bolum.Ad)
+                </td>
 
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.Sehir.Ad) -   @Html.DisplayFor(modelItem => item.Ilce.Ad)
-            </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Sehir.Ad) -   @Html.DisplayFor(modelItem => item.Ilce.Ad)
+                </td>
 
-           
 
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.RandevuDurum)
-            </td>
 
-            <td scope="row" class="text-nowrap">
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.RandevuDurum)
+                </td>
 
-                @if (item.RandevuDurum == "Geçmiş Randevu" || item.RandevuDurum == "İptal")
-                {
-                    //  <a class="btn btn-primary" href="@Html.ActionLink("Yeni Randevu", "Edit", new { id = item.Id })"></a>
-                    <a class="btn btn-primary" href="@Url.Action("Edit","Randevu",new { id=item.Id})">+ Randevu Al</a>
+                <td scope="row" class="text-nowrap">
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
 
-                    //  @Html.ActionLink("Yeni Randevu", "Edit", new { id = item.Id })
-                }
-                else if (item.RandevuDurum == "Aktif")
-                {
-            <a class="btn btn-danger" style="text-align:left; width:75%" href="@Url.Action("Delete","Randevu",new { id=item.Id})">- İptal Et  </a>
-                 //   @Html.ActionLink("İptal Et", "Delete", new { id = item.Id })
-                }
-                else
-                {
-                    <label>Hata</label>
-                }
+                    @if (item.RandevuDurum == "Geçmiş Randevu" || item.RandevuDurum == "İptal")
+                    {
+                        //  <a class="btn btn-primary" href="@Html.ActionLink("Yeni Randevu", "Edit", new { id = item.Id })"></a>
+                        <a class="btn btn-primary" href="@Url.Action("Edit","Randevu",new { id=item.Id})">+ Randevu Al</a>
 
-            </td>
-        </tr>
+                        //  @Html.ActionLink("Yeni Randevu", "Edit", new { id = item.Id })
+                    }
+                    else if (item.RandevuDurum == "Aktif")
+                    {
+                        <a class="btn btn-danger" style="text-align:left; width:75%" href="@Url.Action("Delete","Randevu",new { id=item.Id})">- İptal Et  </a>
+                        //   @Html.ActionLink("İptal Et", "Delete", new { id = item.Id })
+                    }
+                    else
+                    {
+                        <label>Hata</label>
+                    }
+
+                </td>
+            </tr>
         }
-</tbody>
+    </tbody>
 </table>
