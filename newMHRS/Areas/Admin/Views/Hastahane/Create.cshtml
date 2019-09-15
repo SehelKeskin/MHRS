@@ -4,18 +4,17 @@
 
 }
 
-<h2>Create</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Hastahane</h4>
+        <h4>Hastane Kaydı Oluştur</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Ad, "Hastahanenin Adı:", htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.Ad, "Hastanenin Adı:", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
@@ -24,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SehirId, "Hastahanenin Bulunduğu İl:", htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.SehirId, "Hastanenin Bulunduğu İl:", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @*@Html.DropDownList("SehirId", null, htmlAttributes: new { @class = "form-control" })*@
 
@@ -38,7 +37,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IlceId,"Hastahanenin Bulunduğu İlçe:", htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.IlceId,"Hastanenin Bulunduğu İlçe:", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @*@Html.DropDownList("IlceId", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.IlceId, new SelectList(""), "--İlçe Seçiniz", new { @class = "form-control" })
@@ -48,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Adres, "Hastahanenin Adres Bilgisi:", htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.Adres, "Hastanenin Adres Bilgisi:", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @Html.EditorFor(model => model.Adres, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
@@ -56,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Tel, "Hastahanenin Telefonu", htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.Tel, "Hastanenin Telefonu", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
