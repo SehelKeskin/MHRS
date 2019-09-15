@@ -111,6 +111,7 @@ namespace newMHRS.Controllers
                     randevu.BolumId = cascadingClass.BolumId;
                     randevu.DoktorId = cascadingClass.DoktorId;
                     randevu.SaatId = cascadingClass.SaatId;
+                    randevu.RandevuDurum = "Aktif";
                     var saatdeneme = db.Saats.Where(x => x.DoktorId == cascadingClass.DoktorId && x.SaatDurum == false).FirstOrDefault();
                     saatdeneme.SaatDurum = true;
 
