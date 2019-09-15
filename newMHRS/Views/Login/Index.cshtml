@@ -12,9 +12,6 @@
     <title>Index</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-
-
 </head>
 <body>
 
@@ -25,14 +22,12 @@
             @Html.AntiForgeryToken()
             <div class="wrapper fadeInDown">
                 <div id="formContent">
-                    <!-- Tabs Titles -->
-                    <!-- Icon -->
                     <div class="fadeIn first">
-                        <img style="width:180px" src="~/Content/mhrsicon.png" id="icon" alt="User Icon" />
-
+                       <a href="@Url.Action("Index","Home")"> <img style="width:180px" src="~/Content/mhrsicon.png" id="icon" alt="User Icon" />
+                        </a>
                     </div>
                     <br /><br />
-                    <!-- Login Form -->
+                 
                           <form>
 
                               <label class="field-validation-error text-danger">@ViewBag.Message</label><br />
@@ -42,22 +37,17 @@
                               <label class="field-validation-error text-danger">
                                   @Html.ValidationMessageFor(model => model.Tc)
                               </label><br />
-                              @*@Html.EditorFor(model => model.Tc)*@
                               <label style="margin-left:5px;color:dodgerblue;font-size:15px">Şifre :</label>
-                              @Html.TextBoxFor(model => model.Sifre, new { @class = "fadeIn third", @id = "password", @name = "login" })
+                              @Html.TextBoxFor(model => model.Sifre, new { @class = "fadeIn third",@id = "password", @name = "login" })
                               <label class="field-validation-error text-danger">
                                   @Html.ValidationMessageFor(model => model.Sifre)
                               </label>
-
-                              <br /><br />
-
-                              @*<input type="text" id="password" class="fadeIn third" name="login" placeholder="password">*@
+                              <br />
+                              <br />
                               <input type="submit" class="fadeIn fourth" value="Giriş">
                           </form>
-
-                    <!-- Remind Passowrd -->
                     <div id="formFooter">
-                        <a class="underlineHover" href="#">Şifremi Unuttum </a>|
+                        <a class="underlineHover" href="@Url.Action("Sifre","Login")">Şifremi Unuttum </a>|
                         <a class="underlineHover" href="@Url.Action("Create", "Login")">Kayıt Oluştur</a>
                     </div>
 
@@ -65,20 +55,9 @@
             </div>
          
         }
-
-        @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
-
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-            <script src="~/Scripts/jquery.validate.min.js"></script>
-            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-
     </div>
-
-    @*@section Scripts {*@
-    @*@Scripts.Render("~/bundles/jqueryval")*@
     <script>
 
 

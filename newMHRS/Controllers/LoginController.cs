@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using newMHRS.Areas.Admin.Models;
@@ -26,23 +27,38 @@ namespace newMHRS.Controllers
         [HttpPost]//post işleminde çalışıyor.
         public ActionResult Sifre(HastaView model)
         {
-            var sifree = new Guid();
-            if (ModelState.IsValid)//hata var mı kontrol ediyor dataanationda.
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            Random rastgele = new Random();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 8; i++)
+            {
+                int ascii = rastgele.Next(32, 127);
+                char karakter = Convert.ToChar(ascii);
+                sb.Append(karakter);
+
+            }
+            var mailVarmi = db.Hastas.Where(x => x.Mail == model.Mail && x.Tc==model.Tc).FirstOrDefault();
+            if (mailVarmi==null)
+            {
+                ViewBag.Yok = "Mailiniz veya Tc'niz sistemimizde  kayıtlı değildir.";
+              
+            }
+            else
             {
                 try
                 {
                     System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage();
 
-                    mailMessage.From = new System.Net.Mail.MailAddress("sehelcigdem@gmail.com", "Sehel KESKİN");
-                    mailMessage.Subject = "İletişim Formu: " + model.Ad + " ";
+                    mailMessage.From = new System.Net.Mail.MailAddress("mhrSytem@gmail.com", "Şifre Sıfırlama - Hastane Randevu Sistemi");
+                    mailMessage.Subject = "Şifre Yenile Talebi: " + model.Ad + " ";
 
-                    mailMessage.To.Add("sehelcigdem@gmail.com");
+                    mailMessage.To.Add(mailVarmi.Mail);
                     string body;
-                    body = "Ad Soyad: " + model.Ad + " " + model.Soyad + "<br />";
-                    //body += "E-posta: " + model.Email + "<br />";
-                    //body += "Telefon: " + model.Phone + "<br />";
-                    body += "Şifreniz: " + sifree + "<br />";
-                    body += "Tarih: " + DateTime.Now.ToString("dd MMMM yyyy") + "<br />";
+                    body = "Sn : " + mailVarmi.Ad + " " + mailVarmi.Soyad + "<br />";
+                    body += "Yeni Şifreniz: " + sb + "<br />";
+                    body += "Güvenliğiniz açısından şifrenizi güncellemeyi unutmayınız.<br />";
+                    body += "Bu mail size " + DateTime.Now.ToString("dd MMMM yyyy")+" tarihinde gönderildi." + "<br />";
                     mailMessage.IsBodyHtml = true;
                     mailMessage.Body = body;
 
@@ -50,15 +66,20 @@ namespace newMHRS.Controllers
                     smtp.Credentials = new System.Net.NetworkCredential("mhrSytem@gmail.com", "hastaRandevu");
                     smtp.EnableSsl = true;
                     smtp.Send(mailMessage);
-                    ViewBag.Message = "Mesajınız gönderildi. Teşekkür ederiz.";
+                    ViewBag.Message = "Şifre sıfırlama talebiniz mailinize gönderildi. Teşekkür ederiz.";
+
+                    mailVarmi.Sifre = sb.ToString();
+                    mailVarmi.TSifre = sb.ToString();
+                    db.SaveChanges();
 
                 }
                 catch
                 {
-                    ViewBag.Error = "Form gönderimi başarısız oldu tekrar deneriniz.";
+                    ViewBag.Error = "Form gönderimi başarısız oldu tekrar deneyiniz.";
 
                 }
             }
+
             return View(model);
         }
 

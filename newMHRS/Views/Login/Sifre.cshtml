@@ -28,28 +28,36 @@
                     <!-- Tabs Titles -->
                     <!-- Icon -->
                     <div class="fadeIn first">
-                        <img style="width:180px" src="~/Content/mhrsicon.png" id="icon" alt="User Icon" />
-
+                        <a href="@Url.Action("Index","Login")">  <img style="width:180px" src="~/Content/mhrsicon.png" id="icon" alt="User Icon" />
+                        </a>
                     </div>
                     <br /><br />
                     <!-- Login Form -->
-                    <form>
+                          <form>
 
-                        <label style="color:dodgerblue;font-size:20px;font-family:'Times New Roman', Times, serif">Şifreni Yenile</label><br /><br />
-                        <label style="color:dodgerblue;font-size:17px;font-family:'Times New Roman', Times, serif">Mailiniz :</label>
-                        @Html.TextBoxFor(model => model.Mail, new { @class = "fadeIn second", @id = "login", @name = "login" })
-                        <label class="field-validation-error text-danger ">
-                            @Html.ValidationMessageFor(model => model.Mail)
+                              <label style="color:dodgerblue;font-size:20px;font-family:'Times New Roman', Times, serif">Şifreni Yenile</label><br /><br />
+                              <label style="color:dodgerblue;font-size:17px;font-family:'Times New Roman', Times, serif">Tc'niz :</label><br />
+                              @Html.TextBoxFor(model => model.Tc, new { @class = "fadeIn second", @id = "login", @name = "login" })
+                              <label class="field-validation-error text-danger">
+                                  @Html.ValidationMessageFor(model => model.Tc)
 
-                        </label>
-                        @ViewBag.Message
-                        @ViewBag.Error<br />
+                              </label><br />
+                              <label style="color:dodgerblue;font-size:17px;font-family:'Times New Roman', Times, serif">Mailiniz :</label>
+                              @Html.TextBoxFor(model => model.Mail, new { @class = "fadeIn second", @id = "login", @name = "login" })
+                          <label class="field-validation-error text-danger">
+                              @Html.ValidationMessageFor(model => model.Mail) <br />
+                              @ViewBag.Yok <br />
+                              @ViewBag.Message <br />
+                              @ViewBag.Error<br />
+
+                          </label>
+                       
 
 
 
-                        @*<input type="text" id="password" class="fadeIn third" name="login" placeholder="password">*@
-                        <input type="submit" class="fadeIn fourth" value="Şifremi Gönder">
-                    </form>
+                              @*<input type="text" id="password" class="fadeIn third" name="login" placeholder="password">*@
+                              <input type="submit" class="fadeIn fourth" value="Şifremi Gönder">
+                          </form>
 
                     <!-- Remind Passowrd -->
                     <div id="formFooter">
